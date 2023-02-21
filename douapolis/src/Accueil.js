@@ -9,7 +9,6 @@ function Accueil() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [codePartie, setcodePartie] = useState(''); 
-    const [nomJeu, setnomJeu] = useState('DOUAPOLI$');    
 
     //fonction de lancement de partie
     async function lancePartie(event){
@@ -26,42 +25,35 @@ function Accueil() {
         }
     };
 
-    //fonction de changement nom Douapoli$
-    async function changer(){
-        setnomJeu("Projet Informatique");
-    };
-
     //formulaire et titre afficher sur la page 
     return(
-        <Container>
-            <div>
-             <Navigation />
-                    {/*ne fonctionne pas */}
+        <div>
+            <Navigation/>
+                <Container>
                     <div class="Douapolis">
-                        <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
+                        <center><h1> DOUAPOLI$ </h1></center>
                     </div>
-                
-                <div class="Centre">
-                    <Form class="buttonConnexion center">
-                        <Link to="/Connexion">
-                            <Button className="button" type="submit" onClick={lancePartie}> Connexion </Button>
-                        </Link>
-                    </Form>
                     
-                    <Form class="Partie center" name="formulaire">                   
-                        <Form.Label className="input center" > 
-                            Rejoindre une partie
-                            <br/>
-                            <Form.Control className="input center" name="codePartie" required  type="text" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>
+                    <div class="Centre">
+                        <Form.Label>
+                            <Link to="./Connexion">
+                                <div class="button1">
+                                    <Button type="submit"> Connexion </Button>
+                                </div>
+                            </Link>
                         </Form.Label>
-                    </Form>
-                    
-                    <div class="buttonJouer">
-                        <Button type="submit" onClick={lancePartie} className='button'> Joueur </Button>
+                        
+                        <div class="Partie">
+                            <p align="center"><br></br>Rejoindre une partie</p>
+                            <Form.Control name="codePartie" required  type="text" align="center" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>
+                        </div>
+                        
+                        <div class="button2">
+                            <Button type="submit" onClick={lancePartie}> Jouer </Button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </Container>
+                </Container>
+        </div>
     );
 }
 
