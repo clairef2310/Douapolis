@@ -75,6 +75,17 @@ body{
   text-align: center;
 }
 
+.Inscription{
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%,-50%); 
+  position: absolute; 
+  width: 20em; 
+  color: #000000; 
+  font-family: ui-monospace;
+  text-align: center;
+}
+
 .button1{
   position: absolute; 
   left: 50%; 
@@ -85,7 +96,7 @@ body{
 .button2{
   position: absolute;
   left: 93%; 
-  top: 85%; 
+  top: 90%; 
   transform: translate(-50%,-50%); 
 }
 

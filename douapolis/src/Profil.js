@@ -6,13 +6,7 @@ import Navigation from "./Navigation";
 function Profil() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [nomUti, setnomUti] = useState(' ');
-    const [nomJeu, setnomJeu] = useState('DOUAPOLI$');    
-
-    //fonction de changement nom Douapoli$
-    async function changer(){
-        setnomJeu("Projet Informatique");
-    };
+    const [nomUti, setnomUti] = useState(' '); 
 
     //fonction de changement nom Douapoli$
     async function deconneixon(){
@@ -23,14 +17,11 @@ function Profil() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div>
             <Navigation/> 
                 <Container>
                     <div class="Douapolis">
-                        <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
-                    </div> 
-                    <div class="Douapolis">
-                        <center><h1 id="nom joueur">{nomUti}</h1></center>
+                        <center><h1 id="nom joueur">{nomUti}pseudoClaire</h1></center>
                     </div>
                     <div>
                         <ListGroup as="ul">
@@ -38,17 +29,18 @@ function Profil() {
                                 Statistique
                             </ListGroup.Item>
                             <ListGroup.Item as="li">
-                               test
+                               vous étes toujours dernier : nul
                             </ListGroup.Item>
                             <ListGroup.Item as="li">
-                                test
+                                0 livre achetées
                             </ListGroup.Item>
                             <ListGroup.Item as="li">
-                                test
+                                ruiné !
                             </ListGroup.Item>
                         </ListGroup>
                     </div>
                     <div>
+                        <br/>
                         <ListGroup as="ul">
                             <ListGroup.Item as="li" active className="center">
                                 Amis
@@ -65,6 +57,7 @@ function Profil() {
                         </ListGroup>
                     </div>
                     <div>
+                        <br/>
                         <Button type="submit" onClick={deconneixon} className='button'> Déconnexion </Button>
                     </div>
             </Container>

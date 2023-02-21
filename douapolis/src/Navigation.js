@@ -7,7 +7,8 @@ import './index.css'
 
 //Page du menu de l'application 
 function Navigation() {
-
+    // il faudra modifier la deconnexion qui rejoint pour l'instant la page profil 
+    // et creer une page profil different de statistiques avec dedans la modif du mdp et des amis
     //menu de navigation de l'application
     return(
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
@@ -31,12 +32,12 @@ function Navigation() {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/Profil">
                                     <Image alt="" src={ImgProfil} width="30" height="30" className="d-inline-block align-center me-2 " />
-                                    statistique
+                                    Statistique
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/Profil">
                                     <Image alt="" src={ImgProfil} width="30" height="30" className="d-inline-block align-center me-2 " />
-                                    Deconnion
+                                    Deconnexion
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>

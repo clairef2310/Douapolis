@@ -1,5 +1,5 @@
 import {Form,Button, Container,} from "react-bootstrap";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
 import './index.css' 
@@ -9,15 +9,16 @@ function Accueil() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [codePartie, setcodePartie] = useState(''); 
+    let navigate = useNavigate();
 
     //fonction de lancement de partie
     async function lancePartie(event){
-      event.preventDefault(); 
+      event.preventDefault();
 
-        if(codePartie !== "") {
+        if(codePartie != "") {
             var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
-            if( val === true ) {
-                <Navigate to='/Jeu'/>
+            if( val == true ) {
+                navigate("/Jeu", {replace : true});
             } 
         } 
         else{
@@ -34,9 +35,10 @@ function Accueil() {
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
                     
+                    {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
                     <div class="Centre">
                         <Form.Label>
-                            <Link to="./Connexion">
+                            <Link to="/Connexion">
                                 <div class="button1">
                                     <Button type="submit"> Connexion </Button>
                                 </div>
@@ -45,7 +47,7 @@ function Accueil() {
                         
                         <div class="Partie">
                             <p align="center"><br></br>Rejoindre une partie</p>
-                            <Form.Control name="codePartie" required  type="text" align="center" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>
+                            <Form.Control name="codePartie" type="text" align="center" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>
                         </div>
                         
                         <div class="button2">
