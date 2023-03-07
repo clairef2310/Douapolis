@@ -3,11 +3,12 @@ const { MongoClient } = require('mongodb');
 // import { MongoClient } from 'mongodb'
 
 // Connection URL
-const url = 'mongodb://127.0.0.1:27017/douapolis';
+
+const url = 'mongodb://127.0.0.1:27017/';
 const client = new MongoClient(url);
 
 // Database Name
-const dbName = 'users';
+const dbName = 'douapolis';
 
 async function main() {
   // Use connect method to connect to the server
@@ -15,9 +16,6 @@ async function main() {
   console.log('Connected successfully to server');
   const db = client.db(dbName);
   const users = db.collection('users');
-
-  const indexName = await users.createIndex({ name : 'admin' });
-  console.log('index name =', indexName);
 
   return 'done.';
 }
