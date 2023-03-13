@@ -15,7 +15,7 @@ function Connexion() {
      async function Connexion (event){
         event.preventDefault(); 
 
-        if(email != "" && pass !="") {
+        if(email !== "" && pass !=="") {
             //Si le compte existe
             //if( ) {
                 navigate("/Jeu", {replace : true});

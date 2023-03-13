@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 function Profil() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [nomUti, setnomUti] = useState(' '); 
+    const [nomUti] = useState(' '); 
 
     //fonction de changement nom Douapoli$
     async function deconneixon(){

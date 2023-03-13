@@ -15,9 +15,9 @@ function Accueil() {
     async function lancePartie(event){
       event.preventDefault();
 
-        if(codePartie != "") {
+        if(codePartie !== "") {
             var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
-            if( val == true ) {
+            if( val === true ) {
                 navigate("/Jeu", {replace : true});
             } 
         } 
