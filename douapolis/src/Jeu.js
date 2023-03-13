@@ -1,6 +1,7 @@
 import {Container} from "react-bootstrap";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
+import {ReactComponent as ReactLogo} from './plateau/plateau_monopoly.svg';
 
 //page ou l'on joue au monopoly
 function Jeu() {
@@ -21,6 +22,7 @@ function Jeu() {
                 <div class="Douapolis">
                     <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
                 </div> 
+                <ReactLogo/>
         </Container>
      </div>
     );
