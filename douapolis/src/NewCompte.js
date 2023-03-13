@@ -7,25 +7,52 @@ import Navigation from "./Navigation";
 function NewCompte() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [email, setemail] = useState(''); 
-    const [pass, setpass] = useState(''); 
-    const [pass2, setpass2] = useState(''); 
-    const [pseudo, setpseudo] = useState(''); 
+    const [form, setForm] = useState({
+        pseudo: "",
+        email: "",
+        mdp: "",
+    });
+    const[mdp2,setmdp2] = useState('')
     let navigate = useNavigate(); 
+    function updateForm(value) {
+        return setForm((prev) => {
+            return { ...prev, ...value };
+        });
+    }
+    // This function will handle the submission.
 
-    //fonction de lancement de partie
     async function creationCompte(event){
-        event.preventDefault(); 
-          if(email !== "" && pass !== "" && pass2 !== "" && pseudo !== "") {
-            //si le pseudo et l'email sont unique et si le mdp est correct et similaire a la confirmation
-            //alors on se redirige vers la page profil (et si on peut on affiche une alert : compte crée avec succes)
-            navigate("/Profil", {replace : true});
-            //sinon :
-            //on affiche la bonne alerte pour que l'utilisateur corrige l'erreure
-          } 
-          else{
+        if(form.email !== "" && form.mdp !== "" && mdp2 !== "" && form.pseudo !== "") {
+            if(mdp2 === form.mdp){
+                //si le pseudo et l'email sont unique et si le mdp est correct et similaire a la confirmation
+                //alors on se redirige vers la page profil (et si on peut on affiche une alert : compte crée avec succes)
+                event.preventDefault();
+            
+                // When a post request is sent to the create url, we'll add a new record to the database.
+                const newPerson = { ...form };
+                
+                await fetch("http://localhost:5000/users/add", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newPerson),
+                })
+                .catch(error => {
+                    window.alert(error);
+                    return;
+                });
+                setForm({ pseudo: "", email: "", pass: "" });
+                navigate("/Profil", {replace : true});
+            }
+            else{
+                alert("Les mots de passe ne correspondent pas")
+            }
+        }
+        //on affiche la bonne alerte pour que l'utilisateur corrige l'erreure 
+        else{
             alert("Tout les champs doivent être remplis")
-          }
+        }
     };
 
     //formulaire et titre afficher sur la page 
@@ -42,24 +69,24 @@ function NewCompte() {
                             <Form.Label> 
                                 Email
                                 <br/>
-                                <Form.Control type="email" placeholder="Saisissez un email" value={email} onChange={e => setemail(e.target.value)}/>
+                                <Form.Control type="email" placeholder="Saisissez un email" value={form.email} onChange={e => updateForm({email : e.target.value})}/>
                             </Form.Label>
                             {/*le pseudo doit être unique (a gérer avec express) */}
                             <Form.Label> 
                             Pseudo
                             <br/>
-                            <Form.Control type="username" placeholder="Saisissez un pseudo" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
+                            <Form.Control type="username" placeholder="Saisissez un pseudo" value={form.pseudo} onChange={e => updateForm({pseudo : e.target.value})}/>
                             </Form.Label>
                             <Form.Label> 
                                 Mot de passe 
                                 <br/>
-                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={pass} onChange={e => setpass(e.target.value)}/>
+                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={form.mdp} onChange={e => updateForm({mdp : e.target.value})}/>
                             </Form.Label>
                             {/*les deux mot de passe doivent être les mêmes (peut etre fait directement dans le front) */}
                             <Form.Label> 
                                 Confirmer votre mot de passe 
                                 <br/>
-                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={pass2} onChange={e => setpass2(e.target.value)}/>
+                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={mdp2} onChange={e => setmdp2(e.target.value)}/>
                             </Form.Label>
                         </div>
                         
