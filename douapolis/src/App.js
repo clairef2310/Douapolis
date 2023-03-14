@@ -7,7 +7,6 @@ import NewCompte from './NewCompte';
 import NewJeu from './NewJeu';
 
 function App() {
-
     //routes qui vont permettre de naviguer dans l'application
     return (
         <div>
