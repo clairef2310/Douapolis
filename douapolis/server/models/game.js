@@ -14,7 +14,7 @@ const gameSchema = new mongoose.schema({
     maxPlayer: {
         type: Number,
         default: 4
-    }
+    },
     players: [Player],
     gameStarted: {
         type: Boolean,
