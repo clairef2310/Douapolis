@@ -22,7 +22,10 @@ function Jeu() {
                 <div class="Douapolis">
                     <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
                 </div> 
-                <ReactLogo/>
+                <div>
+                    <ReactLogo/>
+                </div>
+                
         </Container>
      </div>
     );

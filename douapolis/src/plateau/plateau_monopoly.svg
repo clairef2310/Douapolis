@@ -47,7 +47,7 @@
   <line x1="568" y1="80" x2="568" y2="0" fill="black" stroke="black" stroke-width="3"/>
 <!--Depart-->
   <text font-size="13" fill="black" x="645" y="650">Départ</text>
-  <image xlink:href="depart.png" x="640" y="650" height="50px" width="50px"/>
+  <image xlink:href="./img/depart.png" x="640" y="650" height="50px" width="50px"/>
 <!--batiment violet-->
   <rect x="447" y="630" width="59" height="30" fill="#7100ae" stroke="black" stroke-width="2"/>
   <text x="455" y="650" font-size="15" fill="white">Astrée</text>
@@ -55,15 +55,15 @@
   <text x="574" y="650" font-size="13" fill="white">Nautibus</text>
 <!--case bourse-->
   <text x="520" y="645" font-size="13" fill="black">Bourse</text>
-  <image xlink:href="bourse.png" x="520" y="655" height="35px" width="35px"/>
+  <image xlink:href="./img/bourse.png" x="520" y="655" height="35px" width="35px"/>
 <!--taxe cafet-->
   <text x="402" y="643" font-size="13" fill="red">Taxe</text>
   <text x="402" y="655" font-size="13" fill="red">Cafèt</text>
-  <image xlink:href="Cafet_ Archimede.jpg" x="388" y="660" height="35px" width="55px"/>
+  <image xlink:href="./img/Cafet_ Archimede.jpg" x="388" y="660" height="35px" width="55px"/>
 <!--arret tram université lyon 1-->
   <text x="327" y="643" font-size="13" fill="black">Université </text>
   <text x="338" y="655" font-size="13" fill="black">Lyon 1 </text>
-  <image xlink:href="tram.png" x="338" y="660" height="35px" width="35px"/>
+  <image xlink:href="./img/tram.png" x="338" y="660" height="35px" width="35px"/>
 <!--batiment bleu clair-->
   <rect x="81" y="630" width="59" height="30" fill="#00d3fc" stroke="black" stroke-width="2"/>
   <text x="88" y="650" font-size="15" fill="white">Darwin</text>
@@ -73,11 +73,11 @@
   <text x="278" y="650" font-size="15" fill="white">Forel</text>
 <!--case chance-->
   <text x="213" y="645" font-size="13" fill="black">Chance</text>
-  <image xlink:href="chance.png" x="215" y="655" height="35px" width="35px"/>
+  <image xlink:href="./img/chance.png" x="215" y="655" height="35px" width="35px"/>
 <!--prison-->
   <text font-size="15" fill="black" transform="translate(10,635) rotate(90)">Simple</text>
   <text x="30" y="690" font-size="15" fill="black">Visite</text>
-  <image xlink:href="bu-sciences.jpg" x="23" y="624" height="70px" width="53px"/>
+  <image xlink:href="./img/bu-sciences.svg" x="23" y="624" height="70px" width="53px"/>
 <!--batiment rose-->
   <rect x="50" y="386" width="30" height="59" fill="#f01e92" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(60, 400) rotate(90)">Cryo</text>
@@ -87,14 +87,14 @@
   <text font-size="12" fill="white" transform="translate(60, 573) rotate(90)">Berthollet</text>
 <!--Case SSU-->
   <text font-size="13" fill="black" transform="translate(60, 525) rotate(90)">SSU</text>
-  <image xlink:href="ssu.png" transform="translate(50, 515) rotate(90)" height="45px" width="45px"/>
+  <image xlink:href="./img/ssu.png" transform="translate(50, 515) rotate(90)" height="45px" width="45px"/>
 <!--arret tram gaston berger-->
   <text font-size="13" fill="black" transform="translate(65, 338) rotate(90)">Gaston</text>
   <text font-size="13" fill="black" transform="translate(53, 338) rotate(90)">Berger</text>
-  <image xlink:href="tram.png" transform="translate(43, 338) rotate(90)" height="35px" width="35px"/>
+  <image xlink:href="./img/tram.png" transform="translate(43, 338) rotate(90)" height="35px" width="35px"/>
 <!--parking-->
   <text font-size="13" fill="black" transform="translate(75, 15) rotate(180)">Parking</text>
-  <image xlink:href="parking.png" transform="translate(78, 78) rotate(180)" height="45px" width="45px"/>
+  <image xlink:href="./img/parking.png" transform="translate(78, 78) rotate(180)" height="45px" width="45px"/>
   <text font-size="13" fill="black" transform="translate(15, 25) rotate(90)">Nautibus</text>
 <!--batiment orange-->
   <rect x="50" y="81" width="30" height="59" fill="#fe6d27" stroke="black" stroke-width="2"/>
@@ -105,7 +105,7 @@
   <text font-size="15" fill="white" transform="translate(60, 272) rotate(90)">Jordan</text>
 <!--case bourse-->
   <text transform="translate(60, 215) rotate(90)" font-size="13" fill="black">Bourse</text>
-  <image xlink:href="bourse.png" transform="translate(50, 215) rotate(90)" height="35px" width="35px"/>
+  <image xlink:href="./img/bourse.png" transform="translate(50, 215) rotate(90)" height="35px" width="35px"/>
 <!--batiment rouge-->
   <rect x="81" y="50" width="59" height="30" fill="red" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(130,60 ) rotate(180)">Géode</text>
@@ -115,11 +115,11 @@
   <text font-size="15" fill="white" transform="translate(310,60 ) rotate(180)">Atlas</text>
 <!--case chance-->
   <text transform="translate(190,60 ) rotate(180)" font-size="13" fill="black">Chance</text>
-  <image xlink:href="chance.png" transform="translate(190,50 ) rotate(180)" height="35px" width="35px"/>
+  <image xlink:href="./img/chance.png" transform="translate(190,50 ) rotate(180)" height="35px" width="35px"/>
 <!--arret tram Insa Einstein-->
   <text font-size="13" fill="black" transform="translate(365, 68) rotate(180)">Insa</text>
   <text font-size="13" fill="black" transform="translate(375, 55) rotate(180)">Einstein</text>
-  <image xlink:href="tram.png" transform="translate(372, 43) rotate(180)" height="35px" width="35px"/>
+  <image xlink:href="./img/tram.png" transform="translate(372, 43) rotate(180)" height="35px" width="35px"/>
 <!--batiment jaune-->
   <rect x="386" y="50" width="59" height="30" fill="#fed725" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(435,60 ) rotate(180)">Ariane</text>
@@ -129,11 +129,11 @@
   <text font-size="15" fill="white" transform="translate(620,60 ) rotate(180)">Omega</text>
 <!--Case La soie -->
   <text font-size="13" fill="black" transform="translate(560, 60) rotate(180)">La SOIE</text>
-  <image xlink:href="la_soie.jpg" transform="translate(560, 50) rotate(180)" height="45px" width="45px"/>
+  <image xlink:href="./img/la_soie.jpg" transform="translate(560, 50) rotate(180)" height="45px" width="45px"/>
 <!--aller en prison -->
   <text font-size="15" fill="black" transform="translate(690,75 ) rotate(-90)">Allez En</text>
   <text font-size="15" fill="black" transform="translate(675,10 ) rotate(180)">Prison</text>
-  <image xlink:href="controleur_tcl.webp" transform="translate(621, 76) rotate(-90)" height="70px" width="53px"/>
+  <image xlink:href="./img/controleur_tcl.webp" transform="translate(621, 76) rotate(-90)" height="70px" width="53px"/>
 <!--batiment vert-->
   <rect x="631" y="81" width="30" height="59" fill="#006f00" stroke="black" stroke-width="2"/>
   <text font-size="14" fill="white" transform="translate(650, 135) rotate(-90)">Déambu</text>
@@ -143,14 +143,14 @@
   <text font-size="14" fill="white" transform="translate(650, 310) rotate(-90)">Lwoff</text>
 <!--case bourse-->
   <text transform="translate(650, 250) rotate(-90)" font-size="13" fill="black">Bourse</text>
-  <image xlink:href="bourse.png" transform="translate(655, 250) rotate(-90)" height="35px" width="35px"/>
+  <image xlink:href="./img/bourse.png" transform="translate(655, 250) rotate(-90)" height="35px" width="35px"/>
   <!--arret tram Croix Luizet -->
   <text font-size="13" fill="black" transform="translate(643, 365) rotate(-90)">Insa</text>
   <text font-size="13" fill="black" transform="translate(655, 374) rotate(-90)">Einstein</text>
-  <image xlink:href="tram.png" transform="translate(660, 372) rotate(-90)" height="35px" width="35px"/>
+  <image xlink:href="./img/tram.png" transform="translate(660, 372) rotate(-90)" height="35px" width="35px"/>
 <!--case chance-->
   <text transform="translate(650, 435) rotate(-90)" font-size="13" fill="black">Chance</text>
-  <image xlink:href="chance.png" transform="translate(655, 430) rotate(-90)" height="35px" width="35px"/>
+  <image xlink:href="./img/chance.png" transform="translate(655, 430) rotate(-90)" height="35px" width="35px"/>
 <!--batiment bleu foncé-->
   <rect x="631" y="447" width="30" height="59" fill="#00007a" stroke="black" stroke-width="2"/>
   <text font-size="14" fill="white" transform="translate(650, 496) rotate(-90)">Raulin</text>
@@ -159,7 +159,7 @@
 <!--taxe restaurant universitaire-->
   <text transform="translate(643, 550) rotate(-90)" font-size="13" fill="red">Taxe</text>
   <text transform="translate(655, 558) rotate(-90)" font-size="13" fill="red">Resto U</text>
-  <image xlink:href="resto_u_jussieu.jpg" transform="translate(660, 565) rotate(-90)" height="35px" width="55px"/>
+  <image xlink:href="./img/resto_u_jussieu.jpg" transform="translate(660, 565) rotate(-90)" height="35px" width="55px"/>
 <!--plateau central-->
   <g transform="rotate(-45) translate(-370,135)">
     <rect x="300" y="80" width="150" height="80" fill="none" stroke="black" stroke-width="2" stroke-dasharray="4,6"/>
