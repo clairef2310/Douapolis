@@ -16,7 +16,7 @@ function connected(isConnected){
                         Profil
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/Profil">
+                    <NavDropdown.Item href="/Deconnexion">
                         <Image alt="" src={ImgDeco} width="30" height="30" className="d-inline-block align-center me-2 " />
                         Deconnexion
                     </NavDropdown.Item>
