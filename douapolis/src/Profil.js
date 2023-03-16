@@ -1,18 +1,50 @@
 import {Container,ListGroup,Button} from "react-bootstrap";
-import {useState, React} from 'react';
+import {useState, React,useEffect } from 'react';
+import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
 
 //page de profil d'un utilisateur
-function Profil() {
-
-    //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [nomUti] = useState(' '); 
-
+export default function Profil() {
     //fonction de changement nom Douapoli$
-    async function deconneixon(){
+    async function deconnexion(){
         
     };
 
+    const [form, setForm] = useState({
+        pseudo: "",
+        email: "",
+        mdp: "",
+    });
+     
+    const params = useParams();
+    const navigate = useNavigate();
+    useEffect(() => {
+        async function fetchData() {
+          const id = params.id.toString();
+          const response = await fetch(`http://localhost:5000/users/${id}`);
+      
+          if (!response.ok) {
+            const message = `An error has occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+      
+          const users = await response.json();
+          if (!users) {
+            window.alert(`Record with id ${id} not found`);
+            navigate("/");
+            return;
+          }
+      
+          setForm(users);
+        }
+      
+        fetchData();
+      
+        return;
+      }, [params.id, navigate]);
+
+    
     //fonction de récupération des données dans la bd 
 
     //formulaire et titre afficher sur la page 
@@ -21,7 +53,7 @@ function Profil() {
             <Navigation/> 
                 <Container>
                     <div class="Douapolis">
-                        <center><h1 id="nom joueur">{nomUti}pseudoClaire</h1></center>
+                        <center><h1 id="nom joueur">{form.pseudo}</h1></center>
                     </div>
                     <div>
                         <ListGroup as="ul">
@@ -58,12 +90,10 @@ function Profil() {
                     </div>
                     <div>
                         <br/>
-                        <Button type="submit" onClick={deconneixon} className='button'> Déconnexion </Button>
+                        <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
                     </div>
             </Container>
 		 </div>
 	   
     );
 }
-
-export default Profil
