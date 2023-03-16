@@ -15,7 +15,7 @@ function App() {
                         <Route  path='/' element={<Accueil/>} />
                         <Route  path='/Connexion' element={<Connexion/>} />   
                         <Route  path='/Jeu' element={<Jeu/>} />   
-                        <Route  path='/Profil/:id' element={<Profil/>} />         
+                        <Route  path='/Profil/:pseudo' element={<Profil/>} />         
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
                     </Routes>
