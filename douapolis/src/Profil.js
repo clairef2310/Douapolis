@@ -20,8 +20,8 @@ export default function Profil() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
-          const id = params.id.toString();
-          const response = await fetch(`http://localhost:5000/users/${id}`);
+          const pseudo = params.id.toString();
+          const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {
             const message = `An error has occurred: ${response.statusText}`;
@@ -31,7 +31,7 @@ export default function Profil() {
       
           const users = await response.json();
           if (!users) {
-            window.alert(`Record with id ${id} not found`);
+            window.alert(`Record with pseudo ${pseudo} not found`);
             navigate("/");
             return;
           }
