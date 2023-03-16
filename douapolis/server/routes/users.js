@@ -23,7 +23,7 @@ usersRoutes.route("/users").get(function (req, res) {
      res.json(result);
    });
 });
- 
+ /*
 // This section will help you get a single users by id
 usersRoutes.route("/users/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
@@ -35,7 +35,7 @@ usersRoutes.route("/users/:id").get(function (req, res) {
      res.json(result);
    });
 });
-
+*/
 // This section will help you get a single users by pseudo
 usersRoutes.route("/users/:pseudo").get(function (req, res) {
   let db_connect = dbo.getDb();

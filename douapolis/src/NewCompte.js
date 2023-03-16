@@ -44,7 +44,7 @@ function NewCompte() {
                     return;
                 });
                 setForm({ pseudo: "", email: "", pass: "" });
-                navigate(`/Profil/${newPerson.find}`);
+                navigate(`/Profil/${newPerson.pseudo}`);
             }
             else{
                 alert("Les mots de passe ne correspondent pas")
