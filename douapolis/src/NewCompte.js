@@ -19,6 +19,7 @@ function NewCompte() {
             return { ...prev, ...value };
         });
     }
+     
     // This function will handle the submission.
 
     async function creationCompte(event){
@@ -43,7 +44,7 @@ function NewCompte() {
                     return;
                 });
                 setForm({ pseudo: "", email: "", pass: "" });
-                navigate("/Profil", {replace : true});
+                navigate(`/Profil/${newPerson.find}`);
             }
             else{
                 alert("Les mots de passe ne correspondent pas")
