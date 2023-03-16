@@ -9,7 +9,7 @@ export default function Profil() {
     async function deconnexion(){
         
     };
-
+    //fonction de récupération des données dans la bd
     const [form, setForm] = useState({
         pseudo: "",
         email: "",
@@ -20,7 +20,7 @@ export default function Profil() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
-          const pseudo = params.id.toString();
+          const pseudo = params.pseudo.toString();
           const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {
@@ -38,14 +38,10 @@ export default function Profil() {
       
           setForm(users);
         }
-      
         fetchData();
       
         return;
-      }, [params.id, navigate]);
-
-    
-    //fonction de récupération des données dans la bd 
+      }, [params.pseudo, navigate]);
 
     //formulaire et titre afficher sur la page 
     return(
