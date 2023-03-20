@@ -1,17 +1,16 @@
 import {Form,Button, Container,} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {useState, React} from 'react';
+import {useState, React,useContext} from 'react';
 import Navigation from "./Navigation";
 import './index.css' 
-
-var isConnected = true; // a passer plus tard en context
+import boolAuth from "./testAuth/boolAuth";
 //page d'accueil du jeu
 function Accueil() {
-
+    const isConnected = useContext(boolAuth);
+    const connexionBool = isConnected.isAuthenticated;
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [codePartie, setcodePartie] = useState(''); 
     let navigate = useNavigate();
-
     //fonction de lancement de partie
     async function lancePartie(event){
       event.preventDefault();
@@ -38,7 +37,7 @@ function Accueil() {
                     
                     {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
                     <div class="Centre">
-                        {(!isConnected && (
+                        {(!connexionBool && (
                             <Form.Label>
                                 <Link to="/Connexion">
                                     <div class="button1">

@@ -1,18 +1,23 @@
 import {Container,ListGroup,Button} from "react-bootstrap";
-import {useState, React,useEffect } from 'react';
+import {useState, React, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
+import Auth from "./testAuth/Auth";
+import boolAuth from "./testAuth/boolAuth";
 
 //page de profil d'un utilisateur
 export default function Profil() {
-    //fonction de changement nom Douapoli$
+    //fonction de deconnexion
+    const isConnected = useContext(boolAuth);
+    const whoConnected = useContext(Auth);
     async function deconnexion(){
-        
+        isConnected.setIsAuthenticated(false);
+        whoConnected.setWhoAuthenticated("");
+        navigate('/');
     };
     //fonction de récupération des données dans la bd
     const [form, setForm] = useState({
         pseudo: "",
-        email: "",
         mdp: "",
     });
      

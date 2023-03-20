@@ -2,14 +2,11 @@ import {Container,Form, Button} from "react-bootstrap";
 import {useNavigate } from "react-router-dom";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
-
 //page de création d'un nouveau compte
 function NewCompte() {
-
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [form, setForm] = useState({
         pseudo: "",
-        email: "",
         mdp: "",
     });
     const[mdp2,setmdp2] = useState('')
@@ -19,13 +16,24 @@ function NewCompte() {
             return { ...prev, ...value };
         });
     }
-     
     // This function will handle the submission.
 
     async function creationCompte(event){
-        if(form.email !== "" && form.mdp !== "" && mdp2 !== "" && form.pseudo !== "") {
+        if(form.mdp !== "" && mdp2 !== "" && form.pseudo !== "") {
+
+            const response = await fetch(`http://localhost:5000/users/${form.pseudo}`);
+            if (!response.ok) {
+                const message = `An error has occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const users = await response.json();
+            if (users) {
+                window.alert('Ce pseudo est déja utilisé');
+                return;
+            }
+
             if(mdp2 === form.mdp){
-                //si le pseudo et l'email sont unique et si le mdp est correct et similaire a la confirmation
                 //alors on se redirige vers la page profil (et si on peut on affiche une alert : compte crée avec succes)
                 event.preventDefault();
             
@@ -43,7 +51,8 @@ function NewCompte() {
                     window.alert(error);
                     return;
                 });
-                setForm({ pseudo: "", email: "", pass: "" });
+                setForm({ pseudo: "", mdp: "" });
+                //setIsAuthenticated(true);
                 navigate(`/Profil/${newPerson.pseudo}`);
             }
             else{
@@ -66,13 +75,7 @@ function NewCompte() {
                     </div>
 
                     <div class="Centre">                       
-                        <div class="Inscription">                   
-                            <Form.Label> 
-                                Email
-                                <br/>
-                                <Form.Control type="email" placeholder="Saisissez un email" value={form.email} onChange={e => updateForm({email : e.target.value})}/>
-                            </Form.Label>
-                            {/*le pseudo doit être unique (a gérer avec express) */}
+                        <div class="Inscription">
                             <Form.Label> 
                             Pseudo
                             <br/>
