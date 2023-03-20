@@ -53,7 +53,6 @@ usersRoutes.route("/users/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
    pseudo: req.body.pseudo,
-   email: req.body.email,
    mdp: req.body.mdp,
  };
  db_connect.collection("users").insertOne(myobj, function (err, res) {
@@ -69,7 +68,6 @@ usersRoutes.route("/update/:id").post(function (req, response) {
  let newvalues = {
    $set: {
     pseudo: req.body.pseudo,
-    email: req.body.email,
     mdp: req.body.mdp,
    },
  };
