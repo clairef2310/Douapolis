@@ -47,7 +47,7 @@
   <line x1="568" y1="80" x2="568" y2="0" fill="black" stroke="black" stroke-width="3"/>
 <!--Depart-->
   <text font-size="13" fill="black" x="645" y="650">Départ</text>
-  <image xlink:href="./img/depart.png" x="640" y="650" height="50px" width="50px"/>
+  <image href="../images/depart.png" x="640" y="650" height="50px" width="50px"/>
 <!--batiment violet-->
   <rect x="447" y="630" width="59" height="30" fill="#7100ae" stroke="black" stroke-width="2"/>
   <text x="455" y="650" font-size="15" fill="white">Astrée</text>
