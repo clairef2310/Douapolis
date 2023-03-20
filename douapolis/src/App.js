@@ -7,7 +7,6 @@ import NewCompte from './NewCompte';
 import NewJeu from './NewJeu';
 
 function App() {
-
     //routes qui vont permettre de naviguer dans l'application
     return (
         <div>
@@ -16,7 +15,7 @@ function App() {
                         <Route  path='/' element={<Accueil/>} />
                         <Route  path='/Connexion' element={<Connexion/>} />   
                         <Route  path='/Jeu' element={<Jeu/>} />   
-                        <Route  path='/Profil' element={<Profil/>} />         
+                        <Route  path='/Profil/:id' element={<Profil/>} />         
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
                     </Routes>

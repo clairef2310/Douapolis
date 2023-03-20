@@ -4,6 +4,7 @@ import {useState, React} from 'react';
 import Navigation from "./Navigation";
 import './index.css' 
 
+var isConnected = true; // a passer plus tard en context
 //page d'accueil du jeu
 function Accueil() {
 
@@ -37,14 +38,23 @@ function Accueil() {
                     
                     {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
                     <div class="Centre">
-                        <Form.Label>
-                            <Link to="/Connexion">
-                                <div class="button1">
-                                    <Button type="submit"> Connexion </Button>
-                                </div>
-                            </Link>
-                        </Form.Label>
-                        
+                        {(!isConnected && (
+                            <Form.Label>
+                                <Link to="/Connexion">
+                                    <div class="button1">
+                                        <Button type="submit"> Connexion </Button>
+                                    </div>
+                                </Link>
+                            </Form.Label>
+                        )) || (
+                            <Form.Label>
+                                <Link to="/NewJeu">
+                                    <div class="button1">
+                                        <Button type="submit"> Créer ma Partie </Button>
+                                    </div>
+                                </Link>
+                            </Form.Label>
+                        )}
                         <div class="Partie">
                             <p align="center"><br></br>Rejoindre une partie</p>
                             <Form.Control name="codePartie" type="text" align="center" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>

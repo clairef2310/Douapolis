@@ -1,33 +1,44 @@
 import {Container,Form, Button} from "react-bootstrap";
-import {Navigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
 
-//Page de création d'un nouveau jeu
-function NewJeu() {
+//page de création d'une nouvelle partie
+function NewPartie() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [email, setemail] = useState(''); 
-    const [pass, setpass] = useState(''); 
-    const [pass2, setpass2] = useState(''); 
-    const [pseudo, setpseudo] = useState(''); 
-    const [nomJeu, setnomJeu] = useState('DOUAPOLI$');    
+    const [form, setForm] = useState({
+        nbJoueurs: "",
+        priv: "",
+        speed: "",
+    });
 
-    //fonction de changement nom Douapoli$
-    async function changer(){
-        setnomJeu("Projet Informatique");
-    };
+    let navigate = useNavigate(); 
+    function updateForm(value) {
+        return setForm((prev) => {
+            return { ...prev, ...value };
+        });
+    }
+    // This function will handle the submission.
 
-    //fonction de lancement de partie
-    async function lancePartie(event){
-        event.preventDefault(); 
-  
-          if(email !== "") {
-              alert("le champ email doit être saisi")
-          } 
-          else{
-              <Navigate to ="/Jeu"/>
-          }
+    async function creationPartie(event){
+        event.preventDefault();
+
+        const newGame = { ...form };
+                
+        await fetch("http://localhost:5000/game/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newGame),
+        })
+        .catch(error => {
+            window.alert(error);
+            return;
+        });
+        setForm({ nbJoueurs: "", priv: "", speed: "" });
+        navigate("/Jeu", {replace : true});
     };
 
     //formulaire et titre afficher sur la page 
@@ -36,36 +47,45 @@ function NewJeu() {
             <Navigation/> 
                 <Container>
                     <div class="Douapolis">
-                        <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
-                    </div> 
+                        <center><h1> DOUAPOLI$ </h1></center>
+                    </div>
+
                     <div class="Centre">                       
-                        <Form class="Partie center" name="formulaire">                   
-                            <Form.Label className="input center" > 
-                                Email
+                        <div class="Inscription">                   
+                            <Form.Label> 
+                                Nombre joueurs
                                 <br/>
-                                <Form.Control className="input center" name="email" required  type="email" placeholder="Saisissez un email" value={email} onChange={e => setemail(e.target.value)}/>
+                                <Form.Select class="form-select" aria-label="Default select example" value={form.nbJoueurs} onChange={e => updateForm({nbJoueurs: e.target.value})}>
+                                    <option selected>Choisissez</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </Form.Select>
                             </Form.Label>
-                            <Form.Label className="input center" > 
-                                Mot de passe 
+                            <br/>
+                            <Form.Label> 
+                                Partie privée ?
                                 <br/>
-                                <Form.Control className="input center" name="password" required  type="password" placeholder="Saisissez un mot de passe" value={pass} onChange={e => setpass(e.target.value)}/>
+                                <Form.Select class="form-select" aria-label="Default select example" value={form.priv} onChange={e => updateForm({priv: e.target.value})}>
+                                    <option selected>Ici aussi</option>
+                                    <option value="private">Privée</option>
+                                    <option value="public">Publique</option>
+                                </Form.Select>
                             </Form.Label>
-                            {/*les deux mot de passe doivent être les mêmes (peut etre fait directement dans le front) */}
-                            <Form.Label className="input center" > 
-                                Confirmer votre mot de passe 
+                            <br/>
+                            <Form.Label> 
+                                Vitesse de jeu
                                 <br/>
-                                <Form.Control className="input center" name="password" required  type="password" placeholder="Saisissez un mot de passe" value={pass2} onChange={e => setpass2(e.target.value)}/>
+                                <select class="form-select" aria-label="Default select example" value={form.speed} onChange={e => updateForm({speed: e.target.value})}>
+                                    <option selected>Encore là</option>
+                                    <option value="normal">Normale</option>
+                                    <option value="fast">Rapide</option>
+                                </select>
                             </Form.Label>
-                             {/*le pseudo doit être unique (a gérer avec express) */}
-                            <Form.Label className="input center" > 
-                                Pseudo
-                                <br/>
-                                <Form.Control className="input center" name="password" required  type="password" placeholder="Saisissez un mot de passe" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
-                            </Form.Label>
-                        </Form>
+                        </div>
                         
-                        <div class="buttonJouer">
-                            <Button type="submit" onClick={lancePartie} className='button'> Valider </Button>
+                        <div class="button2">
+                            <Button type="submit" onClick={creationPartie} > Valider </Button>
                         </div>
                     </div>
                 </Container>
@@ -73,4 +93,4 @@ function NewJeu() {
     );
 }
 
-export default NewJeu
+export default NewPartie
