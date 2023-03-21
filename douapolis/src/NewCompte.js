@@ -1,7 +1,9 @@
 import {Container,Form, Button} from "react-bootstrap";
 import {useNavigate } from "react-router-dom";
-import {useState, React} from 'react';
+import {useState,useContext, React} from 'react';
 import Navigation from "./Navigation";
+import {AuthContext} from "./testAuth/boolAuth";
+import {UserContext} from "./testAuth/userAuth";
 //page de création d'un nouveau compte
 function NewCompte() {
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
@@ -16,6 +18,8 @@ function NewCompte() {
             return { ...prev, ...value };
         });
     }
+    const [authState, setAuthState] = useContext(AuthContext);  
+    const [userState, setUserState] = useContext(UserContext); 
     // This function will handle the submission.
 
     async function creationCompte(event){
@@ -51,8 +55,9 @@ function NewCompte() {
                     window.alert(error);
                     return;
                 });
+                setAuthState((state) => ({ ...state, isLogged: true }));
+                setUserState((state) => ({ ...state, userLogged: form.pseudo }));
                 setForm({ pseudo: "", mdp: "" });
-                //setIsAuthenticated(true);
                 navigate(`/Profil/${newPerson.pseudo}`);
             }
             else{

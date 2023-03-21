@@ -2,17 +2,17 @@ import {Container,Form,Button} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useState, React,useContext} from 'react';
 import Navigation from "./Navigation";
-import Auth from "./testAuth/Auth";
-import boolAuth from "./testAuth/boolAuth";
+import { AuthContext} from "./testAuth/boolAuth";
+import { UserContext} from "./testAuth/userAuth";
 
 //Page de connexion de l'application
 function Connexion() {
-    const isConnected = useContext(boolAuth);
-    const whoConnected = useContext(Auth);
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [pseudo, setpseudo] = useState(''); 
     const [pass, setpass] = useState('');
     let navigate = useNavigate();
+    const [authState, setAuthState] = useContext(AuthContext);  
+    const [userState, setUserState] = useContext(UserContext); 
      //Verification des données de connexion puis envoie à la page d'accueil
      //la fonction n'est pas encore faire
 
@@ -31,10 +31,8 @@ function Connexion() {
             }
             //Si les mdp correspondent
             if(pass===users.mdp) {
-                isConnected.setIsAuthenticated = true;
-                whoConnected.setWhoAuthenticated = pseudo;
-                console.log(isConnected.setIsAuthenticated);
-                console.log(whoConnected.setWhoAuthenticated);
+                setAuthState((state) => ({ ...state, isLogged: true }));
+                setUserState((state) => ({ ...state, userLogged: pseudo }));
                 navigate(`/Profil/${pseudo}`);
             } 
             //sinon
