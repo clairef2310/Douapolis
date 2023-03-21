@@ -6,8 +6,8 @@ import ImgDeco from "./images/deconnection.png";
 import ImgParam from "./images/parametre.png";
 import "bootstrap/dist/css/bootstrap.min.css"
 import './index.css'
-import boolAuth from "./testAuth/boolAuth";
-import Auth from "./testAuth/Auth";
+import {AuthContext} from "./testAuth/boolAuth";
+import {UserContext} from "./testAuth/userAuth";
 //Page du menu de l'application 
 function connected(bool,pseudo){
 
@@ -15,7 +15,7 @@ function connected(bool,pseudo){
         return(
             <Nav className="m-auto">                  
                 <NavDropdown title={pseudo} id="collasible-nav-dropdown" className="justify-content-right">
-                    <NavDropdown.Item href="/Profil">
+                    <NavDropdown.Item href={'/Profil/'+pseudo}>
                         <Image alt="" src={ImgProfil} width="30" height="30" className="d-inline-block align-center me-2 " />
                         Profil
                     </NavDropdown.Item>
@@ -46,10 +46,11 @@ function connected(bool,pseudo){
 }
 
 function Navigation() {
-    const isConnected = useContext(boolAuth);
-    const connexionBool = isConnected.isAuthenticated;
-    const whoConnected = useContext(Auth);
-    const user = whoConnected.whoAuthenticated;
+
+    const [authState, setAuthState] = useContext(AuthContext); 
+    const [userState, setUserState] = useContext(UserContext); 
+    const connexionBool = authState.isLogged;
+    const user = userState.userLogged;
 
     return(
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">

@@ -3,11 +3,12 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState, React,useContext} from 'react';
 import Navigation from "./Navigation";
 import './index.css' 
-import boolAuth from "./testAuth/boolAuth";
+import {AuthContext} from "./testAuth/boolAuth";
+import {UserContext} from "./testAuth/userAuth";
 //page d'accueil du jeu
 function Accueil() {
-    const isConnected = useContext(boolAuth);
-    const connexionBool = isConnected.isAuthenticated;
+    const [authState, setAuthState] = useContext(AuthContext); 
+    const [userState, setUserState] = useContext(UserContext);
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [codePartie, setcodePartie] = useState(''); 
     let navigate = useNavigate();
@@ -37,7 +38,7 @@ function Accueil() {
                     
                     {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
                     <div class="Centre">
-                        {(!connexionBool && (
+                        {(!authState.isLogged && (
                             <Form.Label>
                                 <Link to="/Connexion">
                                     <div class="button1">
