@@ -2,17 +2,17 @@ import {Container,ListGroup,Button} from "react-bootstrap";
 import {useState, React, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
-import Auth from "./testAuth/Auth";
-import boolAuth from "./testAuth/boolAuth";
+import {UserContext} from "./testAuth/userAuth";
+import {AuthContext} from "./testAuth/boolAuth";
 
 //page de profil d'un utilisateur
 export default function Profil() {
     //fonction de deconnexion
-    const isConnected = useContext(boolAuth);
-    const whoConnected = useContext(Auth);
+    const [authState, setAuthState] = useContext(AuthContext); 
+    const [userState, setUserState] = useContext(UserContext); 
     async function deconnexion(){
-        isConnected.setIsAuthenticated(false);
-        whoConnected.setWhoAuthenticated("");
+        setAuthState((state) => ({ ...state, isLogged: false }));
+        setUserState((state) => ({ ...state, userLogged: "" }));
         navigate('/');
     };
     //fonction de récupération des données dans la bd
