@@ -106,3 +106,14 @@ body{
   top: 80%; 
   transform: translate(-50%,-50%); 
 }
+
+.nbaleatoir{
+  position: absolute;
+  left: 60%;
+  top: 20%;
+}
+
+.plateau{
+  position: relative;
+  left : 25%;
+}

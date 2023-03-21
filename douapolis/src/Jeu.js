@@ -12,6 +12,11 @@ function Jeu() {
     const [de1, setde1] = useState('');
     const [de2, setde2] = useState('');
     const [total, setTotal] = useState('');
+    const [variant, setVariant] = useState('primary')
+    const [posx, setPosx] = useState(640);
+    const [posy, setPosy] = useState(60);
+    const [count, setcount] = useState(0);
+    const [player, setPlayer] = useState('Joueur 1');
 
     //fonction de changement nom Douapoli$
     async function changer(){
@@ -22,9 +27,23 @@ function Jeu() {
         let de1 = Math.floor(Math.random() * (6 - 1) + 1);
         let de2 = Math.floor(Math.random() * (6 - 1) + 1);
         let total = de1 + de2;
+        let tab = ['primary','success','warning','danger'];
+        let joueur = ['Joueur 1','Joueur 2','Joueur 3','Joueur 4']
         setde1(de1);
         setde2(de2);
-        setTotal(total);   
+        setTotal(total); 
+       
+        if(de1 !== de2){
+            if(count === 3){
+                setVariant(tab[count]);
+                setPlayer(joueur[count]);
+                setcount(0);
+            }else{
+                setVariant(tab[count]);
+                setPlayer(joueur[count]);
+                setcount(count+1);
+            }
+        }
     };
 
 
@@ -36,18 +55,22 @@ function Jeu() {
                 <div class="Douapolis">
                     <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
                 </div> 
-                <div>
+                <div className="plateau">
                     <ReactLogo/>
-                    <div style={{ position: "absolute", left:"100px"}}>
-                        <Button type="submit" onClick={nbraleatoir}>Lancer le dé</Button>
-                        <h5 style={{ position: "absolute", left:"100px"}}>
-                            Valeur du premier dé : {de1}<br/>
-                            Valeur du deuxième dé : {de2} <br/>
-                            Vous avancez de : {total}  
-                        </h5>
+                        <div className="nbaleatoir">
+                            <Button type="submit" variant={variant} onClick={nbraleatoir}>Lancer le dé</Button>
+                       
+                            <p className="pt-3">
+                                Valeur du premier dé : {de1}<br/>
+                                Valeur du deuxième dé : {de2} <br/>
+                                Vous avancez de : {total}<br/>
+                                C'est au joueur {player} de jouer
+                            </p>
+                        </div>     
+                    <div style={{position:"absolute", left:`${posx}px`,top:`${posy}px`}}>
+                        <img src={trex} alt="pion" width='10%' height='10%'/>
                     </div>
                     
-                    <img src={trex} alt="Logo" width={'100px'} height={'100px'}/>
 
                 </div>
                 
