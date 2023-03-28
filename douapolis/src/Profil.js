@@ -1,18 +1,14 @@
 import {Container,ListGroup,Button} from "react-bootstrap";
-import {useState, React, useEffect, useContext } from 'react';
+import {useState, React, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
-import {UserContext} from "./testAuth/userAuth";
-import {AuthContext} from "./testAuth/boolAuth";
+import { logout, getUser} from "./testAuth/AuthApi";
 
 //page de profil d'un utilisateur
 export default function Profil() {
     //fonction de deconnexion
-    const [authState, setAuthState] = useContext(AuthContext); 
-    const [userState, setUserState] = useContext(UserContext); 
     async function deconnexion(){
-        setAuthState((state) => ({ ...state, isLogged: false }));
-        setUserState((state) => ({ ...state, userLogged: "" }));
+        logout();
         navigate('/');
     };
     //fonction de récupération des données dans la bd
@@ -25,7 +21,8 @@ export default function Profil() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
-          const pseudo = params.pseudo.toString();
+          const pseudo = getUser();
+          console.log(pseudo);
           const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {

@@ -1,9 +1,8 @@
 import {Container,Form,Button} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {useState, React,useContext} from 'react';
+import {useState, React} from 'react';
 import Navigation from "./Navigation";
-import { AuthContext} from "./testAuth/boolAuth";
-import { UserContext} from "./testAuth/userAuth";
+import { login } from "./testAuth/AuthApi";
 
 //Page de connexion de l'application
 function Connexion() {
@@ -11,8 +10,6 @@ function Connexion() {
     const [pseudo, setpseudo] = useState(''); 
     const [pass, setpass] = useState('');
     let navigate = useNavigate();
-    const [authState, setAuthState] = useContext(AuthContext);  
-    const [userState, setUserState] = useContext(UserContext); 
      //Verification des données de connexion puis envoie à la page d'accueil
      //la fonction n'est pas encore faire
 
@@ -31,9 +28,8 @@ function Connexion() {
             }
             //Si les mdp correspondent
             if(pass===users.mdp) {
-                setAuthState((state) => ({ ...state, isLogged: true }));
-                setUserState((state) => ({ ...state, userLogged: pseudo }));
-                navigate(`/Profil/${pseudo}`);
+                login(pseudo);
+                navigate(`/Profil/`);
             } 
             //sinon
             else{

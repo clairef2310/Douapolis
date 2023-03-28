@@ -1,14 +1,12 @@
 import {Form,Button, Container,} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {useState, React,useContext} from 'react';
+import {useState, React} from 'react';
 import Navigation from "./Navigation";
 import './index.css' 
-import {AuthContext} from "./testAuth/boolAuth";
-import {UserContext} from "./testAuth/userAuth";
+import { hasAuthenticated } from "./testAuth/AuthApi";
 //page d'accueil du jeu
 function Accueil() {
-    const [authState, setAuthState] = useContext(AuthContext); 
-    const [userState, setUserState] = useContext(UserContext);
+    let user = hasAuthenticated();
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [codePartie, setcodePartie] = useState(''); 
     let navigate = useNavigate();
@@ -38,7 +36,7 @@ function Accueil() {
                     
                     {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
                     <div class="Centre">
-                        {(!authState.isLogged && (
+                        {(user===false && (
                             <Form.Label>
                                 <Link to="/Connexion">
                                     <div class="button1">

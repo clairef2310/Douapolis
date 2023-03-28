@@ -6,28 +6,22 @@ import Jeu from './Jeu'
 import NewCompte from './NewCompte';
 import Parametres from './Parametres';
 import NewJeu from './NewJeu';
-import { AuthProvider } from './testAuth/boolAuth';
-import { UserProvider } from './testAuth/userAuth';
 
 function App() {
     //routes qui vont permettre de naviguer dans l'application
     return (
         <div>
-            <AuthProvider>
-            <UserProvider>
             <Router>
                     <Routes>
                         <Route  path='/' element={<Accueil/>} />
                         <Route  path='/Connexion' element={<Connexion/>} />   
                         <Route  path='/Parametres' element={<Parametres/>} /> 
                         <Route  path='/Jeu' element={<Jeu/>} />   
-                        <Route  path='/Profil/:pseudo' element={<Profil/>} />         
+                        <Route  path='/Profil/' element={<Profil/>} />         
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
                     </Routes>
             </Router>
-            </UserProvider>
-            </AuthProvider>
         </div>
     );
 }
