@@ -1,4 +1,4 @@
-import {React} from "react";
+import {React,useContext,useEffect} from "react";
 import {Container,Navbar,Nav,NavDropdown,Image} from "react-bootstrap"
 import ImgAccueil from "./images/Accueil.png";
 import ImgProfil from "./images/Profil.png";
@@ -6,10 +6,19 @@ import ImgDeco from "./images/deconnection.png";
 import ImgParam from "./images/parametre.png";
 import "bootstrap/dist/css/bootstrap.min.css"
 import './index.css'
+import { UserContext } from "./testAuth/userAuth";
 import { hasAuthenticated, getUser, logout } from "./testAuth/AuthApi";
 //Page du menu de l'application 
 
 function Navigation() {
+    const [userState, setUserState] = useContext(UserContext);
+    useEffect(() => {
+        async function fetchData() {
+            setUserState((state) => ({ ...state, userLogged: hasAuthenticated() }));
+        }
+        fetchData();
+        return;
+      }, [console.log(userState)]);
     return(
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <Container>
@@ -24,9 +33,9 @@ function Navigation() {
                         </Nav>
                         {/* Onglet Profil avec menu déroulant qui ne s'affiche que si on est connecte*/}   
 
-                        {(false && (
+                        {(userState.userLogged && (
                             <Nav className="m-auto">                  
-                                <NavDropdown title="ok" id="collasible-nav-dropdown" className="justify-content-right">
+                                <NavDropdown title={getUser()} id="collasible-nav-dropdown" className="justify-content-right">
                                     <NavDropdown.Item href={'/Profil/'}>
                                         <Image alt="" src={ImgProfil} width="30" height="30" className="d-inline-block align-center me-2 " />
                                         Profil
@@ -37,7 +46,7 @@ function Navigation() {
                                         Paramètres
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="/">
+                                    <NavDropdown.Item href="/" onClick={logout}>
                                         <Image alt="" src={ImgDeco} width="30" height="30" className="d-inline-block align-center me-2 " />
                                         Deconnexion
                                     </NavDropdown.Item>
