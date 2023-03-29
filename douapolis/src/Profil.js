@@ -22,7 +22,6 @@ export default function Profil() {
     useEffect(() => {
         async function fetchData() {
           const pseudo = getUser();
-          console.log(pseudo);
           const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {

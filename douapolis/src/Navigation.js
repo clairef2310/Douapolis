@@ -18,7 +18,7 @@ function Navigation() {
         }
         fetchData();
         return;
-      }, [console.log(userState)]);
+      }, []);
     return(
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <Container>
