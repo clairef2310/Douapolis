@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 const UserContext = createContext();
 const UserProvider = (props) => {
-    const [userState, setUserState] = useState({ userLogged: "" });  
+    const [userState, setUserState] = useState({ userLogged: false });  
     return (    
         <UserContext.Provider value={[userState, setUserState]}>      
             {props.children}

@@ -1,9 +1,8 @@
 import {Container,Form, Button} from "react-bootstrap";
 import {useNavigate } from "react-router-dom";
-import {useState,useContext, React} from 'react';
+import {useState, React} from 'react';
 import Navigation from "./Navigation";
-import {AuthContext} from "./testAuth/boolAuth";
-import {UserContext} from "./testAuth/userAuth";
+import { login } from "./testAuth/AuthApi";
 //page de création d'un nouveau compte
 function NewCompte() {
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
@@ -18,8 +17,7 @@ function NewCompte() {
             return { ...prev, ...value };
         });
     }
-    const [authState, setAuthState] = useContext(AuthContext);  
-    const [userState, setUserState] = useContext(UserContext); 
+
     // This function will handle the submission.
 
     async function creationCompte(event){
@@ -55,10 +53,9 @@ function NewCompte() {
                     window.alert(error);
                     return;
                 });
-                setAuthState((state) => ({ ...state, isLogged: true }));
-                setUserState((state) => ({ ...state, userLogged: form.pseudo }));
+                login(form.pseudo);
                 setForm({ pseudo: "", mdp: "" });
-                navigate(`/Profil/${newPerson.pseudo}`);
+                navigate(`/Profil/`);
             }
             else{
                 alert("Les mots de passe ne correspondent pas")

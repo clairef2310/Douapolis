@@ -1,15 +1,18 @@
-import {Container,ListGroup,Button} from "react-bootstrap";
+import {Container,Button} from "react-bootstrap";
 import {useState, React,useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
+import { getUser,logout } from "./testAuth/AuthApi";
 
 //page de profil d'un utilisateur
 export default function Profil() {
     //fonction de changement nom Douapoli$
+    
+    //fonction de deconnexion
     async function deconnexion(){
-        //isconnected = false
-        navigate('/');
-    };
+      logout();
+      navigate('/');
+  };
     //fonction de récupération des données dans la bd
     const [form, setForm] = useState({
         pseudo: "",
@@ -21,7 +24,7 @@ export default function Profil() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
-          const pseudo = params.pseudo.toString();
+          const pseudo = getUser();
           const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {
@@ -53,37 +56,7 @@ export default function Profil() {
                         <center><h1 id="nom joueur">{form.pseudo}</h1></center>
                     </div>
                     <div>
-                        <ListGroup as="ul">
-                            <ListGroup.Item as="li" active className="center">
-                                Statistique
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                               vous étes toujours dernier : nul
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                0 livre achetées
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                ruiné !
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </div>
-                    <div>
-                        <br/>
-                        <ListGroup as="ul">
-                            <ListGroup.Item as="li" active className="center">
-                                Amis
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                               Iona
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Mathis
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Romain
-                            </ListGroup.Item>
-                        </ListGroup>
+                       <p>page de parametre</p>
                     </div>
                     <div>
                         <br/>
