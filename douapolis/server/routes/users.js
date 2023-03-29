@@ -23,19 +23,7 @@ usersRoutes.route("/users").get(function (req, res) {
      res.json(result);
    });
 });
- /*
-// This section will help you get a single users by id
-usersRoutes.route("/users/:id").get(function (req, res) {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect
-   .collection("users")
-   .findOne(myquery, function (err, result) {
-     if (err) throw err;
-     res.json(result);
-   });
-});
-*/
+
 // This section will help you get a single users by pseudo
 usersRoutes.route("/users/:pseudo").get(function (req, res) {
   let db_connect = dbo.getDb();
@@ -60,11 +48,11 @@ usersRoutes.route("/users/add").post(function (req, response) {
    response.json(res);
  });
 });
- 
-// This section will help you update a users by id.
-usersRoutes.route("/update/:id").post(function (req, response) {
+
+// This section will help you update a users by pseudo.
+usersRoutes.route("/update/:pseudo").post(function (req, response) {
  let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
+ let myquery = { pseudo: req.params.pseudo };
  let newvalues = {
    $set: {
     pseudo: req.body.pseudo,
