@@ -1,13 +1,11 @@
-import { getItems,addItem,removeItem } from './localStorage';
-import jwtDecode from 'jwt-decode'
+import {addItem,removeItem } from './localStorage';
 
 export function hasAuthenticated(){
-    const user = getItems('user');
-    const result = user ? userIsValid(user) : false;
-    if(false === result){
-        removeItem('user');
+    const user = localStorage.getItem('user');
+    if(user === null){
+        return false;
     }
-    return result;
+    return true;
 }
 
 export function login(user){
@@ -21,14 +19,4 @@ export function logout(){
 
 export function getUser(){
     return localStorage.getItem('user');
-}
-
-function userIsValid(user){
-    const {exp} = jwtDecode(user);
-    console.log(user);
-    if (exp * 1000 > new Date().getTime()){
-        return true;
-    }
-
-    return false;
 }
