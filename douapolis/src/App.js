@@ -6,12 +6,14 @@ import Jeu from './Jeu'
 import NewCompte from './NewCompte';
 import Parametres from './Parametres';
 import NewJeu from './NewJeu';
+import { UserProvider } from './testAuth/userAuth';
 
 function App() {
     //routes qui vont permettre de naviguer dans l'application
     return (
         <div>
             <Router>
+                <UserProvider>
                     <Routes>
                         <Route  path='/' element={<Accueil/>} />
                         <Route  path='/Connexion' element={<Connexion/>} />   
@@ -21,6 +23,7 @@ function App() {
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
                     </Routes>
+                </UserProvider>
             </Router>
         </div>
     );
