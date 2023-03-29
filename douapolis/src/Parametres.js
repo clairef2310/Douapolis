@@ -2,15 +2,17 @@ import {Container,Button} from "react-bootstrap";
 import {useState, React,useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
-import { getUser } from "./testAuth/AuthApi";
+import { getUser,logout } from "./testAuth/AuthApi";
 
 //page de profil d'un utilisateur
 export default function Profil() {
     //fonction de changement nom Douapoli$
+    
+    //fonction de deconnexion
     async function deconnexion(){
-        //isconnected = false
-        navigate('/');
-    };
+      logout();
+      navigate('/');
+  };
     //fonction de récupération des données dans la bd
     const [form, setForm] = useState({
         pseudo: "",
