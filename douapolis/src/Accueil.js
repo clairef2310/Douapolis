@@ -1,4 +1,4 @@
-import {Form,Button, Container,} from "react-bootstrap";
+import {Form,Button, Container,InputGroup} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useState, React,useEffect,useContext} from 'react';
 import Navigation from "./Navigation";
@@ -32,45 +32,45 @@ function Accueil() {
         }
         fetchData();
         return;
-      }, []);
+      }, [setUserState]);
     //formulaire et titre afficher sur la page 
     return(
-        <div>
+        <div className="body">
             <Navigation/>
-                <Container>
-                    <div class="Douapolis">
-                        <center><h1> DOUAPOLI$ </h1></center>
+            <Container>
+                <div className="Douapolis">
+                    <center><h1> DOUAPOLI$ </h1></center>
+                </div>
+                {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
+                <div className="Centre"> 
+                    {(userState.userLogged===false && (
+                        <Form.Label>
+                            <Link to="/Connexion">
+                                <div className="button1">
+                                    <Button size="lg" type="submit"> Connexion </Button>
+                                </div>
+                            </Link>
+                        </Form.Label>
+                    )) || (
+                        <Form.Label>
+                            <Link to="/NewJeu">
+                                <div className="button1">
+                                    <Button size="lg" type="submit" > Créer ma Partie </Button>
+                                </div>
+                            </Link>
+                        </Form.Label>
+                    )}
+                    <div className="rejPartie">
+                        <InputGroup size="lg">
+                            <Button variant="primary" id="lg" disabled>Rejoindre une partie </Button>
+                            <Form.Control name="codePartie" type="text" align="center" placeholder="CODE PARTIE" 
+                                value={codePartie} onChange={e => setcodePartie(e.target.value)}
+                            />
+                            <Button size="lg" type="submit" onClick={lancePartie}> Jouer </Button>
+                        </InputGroup>
                     </div>
-                    
-                    {/*ici on devra modifier le bouton connexion si la personne est deja connectee, en un bouton creation de partie*/}
-                    <div class="Centre"> 
-                        {(userState.userLogged===false && (
-                            <Form.Label>
-                                <Link to="/Connexion">
-                                    <div class="button1">
-                                        <Button type="submit"> Connexion </Button>
-                                    </div>
-                                </Link>
-                            </Form.Label>
-                        )) || (
-                            <Form.Label>
-                                <Link to="/NewJeu">
-                                    <div class="button1">
-                                        <Button type="submit"> Créer ma Partie </Button>
-                                    </div>
-                                </Link>
-                            </Form.Label>
-                        )}
-                        <div class="Partie">
-                            <p align="center"><br></br>Rejoindre une partie</p>
-                            <Form.Control name="codePartie" type="text" align="center" placeholder="CODE PARTIE" value={codePartie} onChange={e => setcodePartie(e.target.value)}/>
-                        </div>
-                        
-                        <div class="button2">
-                            <Button type="submit" onClick={lancePartie}> Jouer </Button>
-                        </div>
-                    </div>
-                </Container>
+                </div>
+            </Container>
         </div>
     );
 }

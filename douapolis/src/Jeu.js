@@ -15,10 +15,10 @@ function Jeu() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div className="body">
         <Navigation/> 
             <Container>
-                <div class="Douapolis">
+                <div className="Douapolis">
                     <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
                 </div> 
         </Container>

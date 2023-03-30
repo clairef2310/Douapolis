@@ -1,6 +1,5 @@
-body{
-  background-color:  #90999C;
-  margin-top:10px;
+.body{
+  background-color:  #C9F5D1;
 }
 
 .Douapolis{
@@ -46,22 +45,32 @@ body{
   background-color: rgba(210, 210, 210, 0.5); 
   color: #FFFFFF; 
 	font-family: ui-monospace; 
-  margin-left: auto; 
-  margin-right: auto; 
-  margin-top: 1em; 
+  left: 50%;
+  margin-top: 13em; 
   border-radius: 25px;
+  transform: translate(-50%,-50%);
 }
-			
+
+.rejPartie{
+  left: 50%; 
+  top: 68%; 
+  transform: translate(-50%,-50%); 
+  position: absolute; 
+  width: 27em; 
+  font-family: ui-monospace;
+  border-radius: 8px;
+}
+
 .Partie{
   left: 50%; 
   top: 65%; 
   transform: translate(-50%,-50%); 
   position: absolute; 
   width: 20em; 
-  background-color: #107BD5; 
+  background-color: #1768ff; 
   color: #FFFFFF; 
   font-family: ui-monospace;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .Connexion{
@@ -89,7 +98,7 @@ body{
 .button1{
   position: absolute; 
   left: 50%; 
-  top: 25%; 
+  top: 31%; 
   transform: translate(-50%,-50%);
 }
 			

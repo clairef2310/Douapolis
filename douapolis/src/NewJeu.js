@@ -43,19 +43,19 @@ function NewPartie() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
 
-                    <div class="Centre">                       
-                        <div class="Inscription">                   
+                    <div className="Centre">                       
+                        <div className="Inscription">                   
                             <Form.Label> 
                                 Nombre joueurs
                                 <br/>
-                                <Form.Select class="form-select" aria-label="Default select example" value={form.nbJoueurs} onChange={e => updateForm({nbJoueurs: e.target.value})}>
+                                <Form.Select className="form-select" aria-label="Default select example" value={form.nbJoueurs} onChange={e => updateForm({nbJoueurs: e.target.value})}>
                                     <option selected>Choisissez</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -66,7 +66,7 @@ function NewPartie() {
                             <Form.Label> 
                                 Partie privée ?
                                 <br/>
-                                <Form.Select class="form-select" aria-label="Default select example" value={form.priv} onChange={e => updateForm({priv: e.target.value})}>
+                                <Form.Select className="form-select" aria-label="Default select example" value={form.priv} onChange={e => updateForm({priv: e.target.value})}>
                                     <option selected>Ici aussi</option>
                                     <option value="private">Privée</option>
                                     <option value="public">Publique</option>
@@ -76,7 +76,7 @@ function NewPartie() {
                             <Form.Label> 
                                 Vitesse de jeu
                                 <br/>
-                                <select class="form-select" aria-label="Default select example" value={form.speed} onChange={e => updateForm({speed: e.target.value})}>
+                                <select className="form-select" aria-label="Default select example" value={form.speed} onChange={e => updateForm({speed: e.target.value})}>
                                     <option selected>Encore là</option>
                                     <option value="normal">Normale</option>
                                     <option value="fast">Rapide</option>
@@ -84,7 +84,7 @@ function NewPartie() {
                             </Form.Label>
                         </div>
                         
-                        <div class="button2">
+                        <div className="button2">
                             <Button type="submit" onClick={creationPartie} > Valider </Button>
                         </div>
                     </div>

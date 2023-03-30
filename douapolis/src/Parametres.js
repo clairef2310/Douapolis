@@ -23,6 +23,7 @@ export default function Profil() {
     const [newPseudo, setNewPseudo] = useState('');
     //constante de navigation
     const navigate = useNavigate();
+    //constantes pour l'alerte de confirmation
 
     //fonction de changement de pseudo
     async function modifPseudo(event){
@@ -176,56 +177,55 @@ export default function Profil() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div>
+        <div className="body">
             <Navigation/> 
-                <Container>
-                    <div class="Douapolis">
-                        <center><h1 id="nom joueur">{form.pseudo}</h1></center>
-                    </div>
-                    <div>
-                        <Accordion defaultActiveKey="0">
-                            <Accordion.Item eventKey='0'>
-                                <Accordion.Header>
-                                    Modifier mon Pseudo
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <Form.Group>
-                                        <Form.Label>Nouveau Pseudo</Form.Label>
-                                        <Form.Control type={newPseudo} onChange={e => setNewPseudo(e.target.value)} placeholder="Entrez votre nouveau pseudo" />
-                                        <Form.Text className="text-muted">
-                                            Le nouveau pseudo ne doit pas déjà exister.
-                                        </Form.Text><br/>
-                                        <Button type="submit" onClick={modifPseudo} className='button'> Envoyer </Button>
-                                    </Form.Group>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item eventKey='1'>
-                                <Accordion.Header>
-                                    Modifier mon Mot de Passe
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <Form.Group>
-                                        <Form.Label>Ancien Mot de passe</Form.Label>
-                                        <Form.Control className="mb-3" type={oldPass} onChange={e => setOldPass(e.target.value)} placeholder="Entrez votre nouveau mot de passe" />
-                                        <Form.Label>Nouveau Mot de passe</Form.Label>
-                                        <Form.Control className="mb-3" type={newPass} onChange={e => setNewPass(e.target.value)} placeholder="Entrez votre nouveau mot de passe" />
-                                        <Form.Label>Confirmation nouveau Mot de passe</Form.Label>
-                                        <Form.Control type={verifPass} onChange={e => setVerifPass(e.target.value)} placeholder="Validez votre ancien mot de passe" />
-                                        <Form.Text className="text-muted">
-                                            L'ancien mot de passe doit être différent du nouveau.
-                                        </Form.Text><br/>
-                                        <Button type="submit" onClick={modifPass} className='button'> Envoyer </Button>
-                                    </Form.Group>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Accordion>
-                    </div>
-                    <div>
-                        <br/>
+            <Container>
+                <div className="Douapolis">
+                    <center><h1 id="nom joueur">{form.pseudo}</h1></center>
+                </div>
+                <div>
+                    <Accordion defaultActiveKey="">
+                        <Accordion.Item eventKey='0'>
+                            <Accordion.Header>
+                                Modifier mon Pseudo
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <Form.Group>
+                                    <Form.Label>Nouveau Pseudo</Form.Label>
+                                    <Form.Control type={newPseudo} onChange={e => setNewPseudo(e.target.value)} placeholder="Entrez votre nouveau pseudo" />
+                                    <Form.Text className="text-muted">
+                                        Le nouveau pseudo ne doit pas déjà exister.
+                                    </Form.Text><br/>
+                                    <Button type="submit" onClick={modifPseudo} className='button'> Envoyer </Button>
+                                </Form.Group>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey='1'>
+                            <Accordion.Header>
+                                Modifier mon Mot de Passe
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <Form.Group>
+                                    <Form.Label>Ancien Mot de passe</Form.Label>
+                                    <Form.Control className="mb-3" type="password" value={oldPass} onChange={e => setOldPass(e.target.value)} placeholder="Entrez votre nouveau mot de passe" />
+                                    <Form.Label>Nouveau Mot de passe</Form.Label>
+                                    <Form.Control className="mb-3" type="password" value={newPass} onChange={e => setNewPass(e.target.value)} placeholder="Entrez votre nouveau mot de passe" />
+                                    <Form.Label>Confirmation nouveau Mot de passe</Form.Label>
+                                    <Form.Control type="password" value={verifPass} onChange={e => setVerifPass(e.target.value)} placeholder="Validez votre ancien mot de passe" />
+                                    <Form.Text className="text-muted">
+                                        L'ancien mot de passe doit être différent du nouveau.
+                                    </Form.Text><br/>
+                                    <Button type="submit" onClick={modifPass} className='button'> Envoyer </Button>
+                                </Form.Group>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                </div>
+                <div>
+                    <br/>
                         <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
                     </div>
             </Container>
-		 </div>
-	   
+		</div>
     );
 }

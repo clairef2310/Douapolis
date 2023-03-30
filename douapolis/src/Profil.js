@@ -46,10 +46,10 @@ export default function Profil() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div>
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1 id="nom joueur">{form.pseudo}</h1></center>
                     </div>
                     <div>

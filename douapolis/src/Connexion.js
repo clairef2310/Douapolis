@@ -43,15 +43,15 @@ function Connexion() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div>
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
 
-                    <div class="Centre">                       
-                        <div class="Connexion">                   
+                    <div className="Centre">                       
+                        <div className="Connexion">                   
                             <Form.Label> 
                                 pseudo <br/>
                                 <Form.Control name="pseudo" type="pseudo" placeholder="Saisissez votre pseudo" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
@@ -63,7 +63,7 @@ function Connexion() {
                             <Button type="submit" onClick={Connect}> Connexion </Button>
                         </div>
                         
-                        <div class="button3">
+                        <div className="button3">
                             <Link to="/NewCompte">
                                     <Button type="submit"> Créer un compte </Button>
                             </Link>

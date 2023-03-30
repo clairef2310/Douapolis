@@ -69,15 +69,15 @@ function NewCompte() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
 
-                    <div class="Centre">                       
-                        <div class="Inscription">
+                    <div className="Centre">                       
+                        <div className="Inscription">
                             <Form.Label> 
                             Pseudo
                             <br/>
@@ -96,7 +96,7 @@ function NewCompte() {
                             </Form.Label>
                         </div>
                         
-                        <div class="button2">
+                        <div className="button2">
                             <Button type="submit" onClick={creationCompte} > Valider </Button>
                         </div>
                     </div>
