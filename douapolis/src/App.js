@@ -6,6 +6,7 @@ import Jeu from './Jeu'
 import NewCompte from './NewCompte';
 import Parametres from './Parametres';
 import NewJeu from './NewJeu';
+import SalleAttente from './SalleAttente';
 import { UserProvider } from './testAuth/userAuth';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                         <Route  path='/Profil/' element={<Profil/>} />         
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
+                        <Route  path='/SalleAttente' element={<SalleAttente/>} />                    
                     </Routes>
                 </UserProvider>
             </Router>
