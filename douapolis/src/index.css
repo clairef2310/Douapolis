@@ -1,10 +1,12 @@
 .body{
-  background-color:  #C9F5D1;
+  /*C9F5D1 -> Couleur verte Monopoly*/
+  background-color:  #FFFFFF; 
 }
 
 .Douapolis{
   position: relative;
-  width: 15em; 
+  display: inline-block;
+  width: auto; 
   border: 5px solid #FFFFFF; 
   box-shadow: 4px 4px 4px #444; 
   background-color: #cb1600; 
@@ -50,7 +52,17 @@
   border-radius: 25px;
   transform: translate(-50%,-50%);
 }
-
+/* Quand je change la couleur de mon background,j'ai un soucis car la couleur 
+ne prend pas tout l'écran, il faudrait mettre un footer qui se colle à la derniere div
+.Pied{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: ??? px;
+  background: #000000;
+  color: #FFFFFF;
+}
+*/
 .rejPartie{
   left: 50%; 
   top: 68%; 
@@ -75,10 +87,9 @@
 
 .Connexion{
   left: 50%; 
-  top: 35%; 
+  top: 50%; 
   transform: translate(-50%,-50%); 
   position: absolute; 
-  width: 20em; 
   color: #000000; 
   font-family: ui-monospace;
   text-align: center;
@@ -114,4 +125,8 @@
   left: 50%; 
   top: 80%; 
   transform: translate(-50%,-50%); 
+}
+
+p{
+  color: #000000;
 }
