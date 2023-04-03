@@ -24,10 +24,10 @@ gameRoutes.route("/game").get(function (req, res) {
    });
 });
  
-// This section will help you get a single game by id
-gameRoutes.route("/game/:id").get(function (req, res) {
+// This section will help you get a single game by codePartie
+gameRoutes.route("/game/:code").get(function (req, res) {
  let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
+ let myquery = { code: req.params.code };
  db_connect
    .collection("game")
    .findOne(myquery, function (err, result) {
@@ -43,6 +43,8 @@ gameRoutes.route("/game/add").post(function (req, response) {
     nbJoueurs: req.body.nbJoueurs,
     priv: req.body.priv,
     speed: req.body.speed,
+    code: req.body.code,
+    host: req.body.host,
  };
  db_connect.collection("game").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -59,6 +61,8 @@ gameRoutes.route("/update/:id").post(function (req, response) {
     nbJoueurs: req.body.nbJoueurs,
     priv: req.body.priv,
     speed: req.body.speed,
+    code: req.body.code,
+    host: req.body.host,
    },
  };
  db_connect

@@ -42,6 +42,7 @@ usersRoutes.route("/users/add").post(function (req, response) {
  let myobj = {
    pseudo: req.body.pseudo,
    mdp: req.body.mdp,
+   myGame: req.body.myGame,
  };
  db_connect.collection("users").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -57,6 +58,7 @@ usersRoutes.route("/update/:pseudo").post(function (req, response) {
    $set: {
     pseudo: req.body.pseudo,
     mdp: req.body.mdp,
+    myGame: req.body.myGame,
    },
  };
  db_connect
