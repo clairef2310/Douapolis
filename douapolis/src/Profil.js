@@ -90,7 +90,6 @@ export default function Profil() {
                         <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
                     </div>
             </Container>
-		 </div>
-	   
+        </div>
     );
 }
