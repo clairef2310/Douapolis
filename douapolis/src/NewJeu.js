@@ -78,7 +78,7 @@ function NewPartie() {
             });
             setUser({pseudo : "", mdp : "", myGame : ""});
             setForm({ nbJoueurs: "", priv: "", speed: "", code : "", host : ""});
-            navigate("/SalleAttente", {replace : true});
+            navigate(`/SalleAttente?${codePartie}`, {replace : true});
         }
         else{
             window.alert("veuillez remplir tout les champs");

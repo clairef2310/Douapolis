@@ -13,14 +13,25 @@ function Accueil() {
     let navigate = useNavigate();
     //fonction de lancement de partie
     async function lancePartie(event){
-      event.preventDefault();
-
+        event.preventDefault();
         if(codePartie !== "") {
-            var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
-            if( val === true ) {
-                navigate("/Jeu", {replace : true});
-            } 
-        } 
+            const response = await fetch(`http://localhost:5000/game/${codePartie}`);
+            if (!response.ok) {
+                const message = `An error has occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const game = await response.json();
+            if (game) {
+                var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
+                if( val === true ) {
+                    navigate(`/SalleAttente?${codePartie}`, {replace : true});
+                }
+            }
+            else{
+                alert("Cette partie n'existe pas");
+            }
+        }
         else{
             alert("Merci de rentrer un code de partie.");
         }

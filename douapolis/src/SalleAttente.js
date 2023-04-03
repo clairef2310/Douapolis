@@ -10,25 +10,25 @@ function SalleAttente() {
     const [code, setCode] = useState('');
     const [host, setHost] = useState('');
     async function getCode(){
-        const user = getUser();
-        const response = await fetch(`http://localhost:5000/users/${user}`);
+        const codePartie = window.location.search.substr(1);
+        const response = await fetch(`http://localhost:5000/game/${codePartie}`);
         if (!response.ok) {
             const message = `An error has occurred: ${response.statusText}`;
             window.alert(message);
             return;
         }
         const rep = await response.json();
-        if (rep && rep.games!==null) {
-            setHost(rep.pseudo);
-            setCode(rep.myGame);
+        setHost(rep.host);
+        setCode(rep.code);
+        if (getUser()===rep.host) {
             return(
                 console.log("Je suis l'hote")
-            )
+            );
         }
         else{
             return(
-                console.log("Je un simple joueur")
-            )
+                console.log("Je suis un simple joueur")
+            );
         }
     }
     getCode();
@@ -45,6 +45,7 @@ function SalleAttente() {
                 <div className="Centre">
                     <p>Le code partie est : {code}</p>
                     <p>L'hôte est : {host}</p>
+                    <p>Joueur(s) : {getUser()}</p>
                 </div>
             </Container>
         </div>
