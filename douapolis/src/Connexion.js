@@ -1,4 +1,4 @@
-import {Container,Form,Button} from "react-bootstrap";
+import {Container,Form,Button,Row,Col,ListGroup} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
@@ -43,31 +43,43 @@ function Connexion() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div>
-            <Navigation/> 
+        <div className="body">
+            <Navigation/>
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
-
-                    <div class="Centre">                       
-                        <div class="Connexion">                   
-                            <Form.Label> 
-                                pseudo <br/>
-                                <Form.Control name="pseudo" type="pseudo" placeholder="Saisissez votre pseudo" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
-                            </Form.Label>
-                            <Form.Label> 
-                                Mot de passe <br/>
-                                <Form.Control name="password" type="password" placeholder="Saisissez un mot de passe" value={pass} onChange={e => setpass(e.target.value)}/>
-                            </Form.Label>
-                            <Button type="submit" onClick={Connect}> Connexion </Button>
-                        </div>
-                        
-                        <div class="button3">
-                            <Link to="/NewCompte">
-                                    <Button type="submit"> Créer un compte </Button>
-                            </Link>
-                        </div>
+                    <div className="Centre">                       
+                        <Row className="row h-100 justify-content-center align-items-center">
+                            <Col xs={5} align='center'>
+                                <ListGroup as="ul">
+                                    <ListGroup.Item as="li" active>
+                                        Connectez vous
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        <Form.Control name="pseudo" type="pseudo" placeholder="Saisissez votre pseudo" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                    <Form.Control name="password" type="password" placeholder="Saisissez un mot de passe" value={pass} onChange={e => setpass(e.target.value)}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        <Button type="submit" onClick={Connect}> Connexion </Button>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Col>
+                            <Col xs={5} align='center'>
+                                <ListGroup as="ul">
+                                    <ListGroup.Item as="li" variant="danger">
+                                        Pas encore de compte ?
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li" variant="secondary">
+                                        <Link to="/NewCompte">
+                                            <Button type="submit" variant="secondary"> Créer Un Compte </Button>
+                                        </Link>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Col>
+                        </Row>                 
                     </div>
                 </Container>
         </div>

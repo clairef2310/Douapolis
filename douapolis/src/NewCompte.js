@@ -1,4 +1,4 @@
-import {Container,Form, Button} from "react-bootstrap";
+import {Container,Form, Button,ListGroup,Row,Col} from "react-bootstrap";
 import {useNavigate } from "react-router-dom";
 import {useState, React} from 'react';
 import Navigation from "./Navigation";
@@ -69,36 +69,34 @@ function NewCompte() {
 
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
-
-                    <div class="Centre">                       
-                        <div class="Inscription">
-                            <Form.Label> 
-                            Pseudo
-                            <br/>
-                            <Form.Control type="username" placeholder="Saisissez un pseudo" value={form.pseudo} onChange={e => updateForm({pseudo : e.target.value})}/>
-                            </Form.Label>
-                            <Form.Label> 
-                                Mot de passe 
-                                <br/>
-                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={form.mdp} onChange={e => updateForm({mdp : e.target.value})}/>
-                            </Form.Label>
-                            {/*les deux mot de passe doivent être les mêmes (peut etre fait directement dans le front) */}
-                            <Form.Label> 
-                                Confirmer votre mot de passe 
-                                <br/>
-                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={mdp2} onChange={e => setmdp2(e.target.value)}/>
-                            </Form.Label>
-                        </div>
-                        
-                        <div class="button2">
-                            <Button type="submit" onClick={creationCompte} > Valider </Button>
-                        </div>
+                    <div className="Centre">                       
+                        <Row className="row h-100 justify-content-center align-items-center">
+                            <Col xs={5} align='center'>
+                                <ListGroup as="ul">
+                                    <ListGroup.Item as="li" active>
+                                        Création de mon compte
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        <Form.Control type="username" placeholder="Saisissez un pseudo" value={form.pseudo} onChange={e => updateForm({pseudo : e.target.value})}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                    <Form.Control type="password" placeholder="Saisissez un mot de passe" value={form.mdp} onChange={e => updateForm({mdp : e.target.value})}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        <Form.Control type="password" placeholder="Saisissez un mot de passe" value={mdp2} onChange={e => setmdp2(e.target.value)}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                    <Button type="submit" onClick={creationCompte} > Valider </Button>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Col>
+                        </Row>                  
                     </div>
                 </Container>
         </div>

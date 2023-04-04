@@ -22,7 +22,6 @@ export default function Profil() {
     useEffect(() => {
         async function fetchData() {
           const pseudo = getUser();
-          console.log(pseudo);
           const response = await fetch(`http://localhost:5000/users/${pseudo}`);
       
           if (!response.ok) {
@@ -45,12 +44,20 @@ export default function Profil() {
         return;
       }, [params.pseudo, navigate]);
 
+    function stats(){
+        navigate('/AjoutStats');
+    }
+
+    function param(){
+        navigate('/AjoutStats');
+    }
+
     //formulaire et titre afficher sur la page 
     return(
-        <div>
+        <div className="body">
             <Navigation/> 
                 <Container>
-                    <div class="Douapolis">
+                    <div className="Douapolis">
                         <center><h1 id="nom joueur">{form.pseudo}</h1></center>
                     </div>
                     <div>
@@ -89,9 +96,12 @@ export default function Profil() {
                     <div>
                         <br/>
                         <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
+                        <br/>
+                        <Button type="submit" onClick={stats} className='button'> Stats </Button>
+                        <br/>
+                        <Button type="submit" onClick={param} className='button'> Param </Button>
                     </div>
             </Container>
-		 </div>
-	   
+        </div>
     );
 }
