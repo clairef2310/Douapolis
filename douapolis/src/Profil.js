@@ -44,6 +44,14 @@ export default function Profil() {
         return;
       }, [params.pseudo, navigate]);
 
+    function stats(){
+        navigate('/AjoutStats');
+    }
+
+    function param(){
+        navigate('/AjoutStats');
+    }
+
     //formulaire et titre afficher sur la page 
     return(
         <div className="body">
@@ -88,6 +96,10 @@ export default function Profil() {
                     <div>
                         <br/>
                         <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
+                        <br/>
+                        <Button type="submit" onClick={stats} className='button'> Stats </Button>
+                        <br/>
+                        <Button type="submit" onClick={param} className='button'> Param </Button>
                     </div>
             </Container>
         </div>
