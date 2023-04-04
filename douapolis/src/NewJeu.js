@@ -8,8 +8,7 @@ function NewPartie() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [form, setForm] = useState({
-        nbJoueurs: "",
-        priv: "",
+        nbJoueurs: 0,
         speed: "",
         code : "",
         host : "",
@@ -30,7 +29,7 @@ function NewPartie() {
     // This function will handle the submission.
 
     async function creationPartie(event){
-        if(form.nbJoueurs !== '' && form.priv !== '' && form.speed !== ''){
+        if(form.nbJoueurs !== '' && form.speed !== ''){
             event.preventDefault();
             const codePartie = generateCode();
             form.code = codePartie;
@@ -77,7 +76,7 @@ function NewPartie() {
                 return;
             });
             setUser({pseudo : "", mdp : "", myGame : ""});
-            setForm({ nbJoueurs: "", priv: "", speed: "", code : "", host : ""});
+            setForm({ nbJoueurs: 0, speed: "", code : "", host : ""});
             navigate(`/SalleAttente?${codePartie}`, {replace : true});
         }
         else{
@@ -125,7 +124,7 @@ function NewPartie() {
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Nombre joueurs :
-                                        <Form.Select className="form-select" aria-label="Default select example" value={form.nbJoueurs} onChange={e => updateForm({nbJoueurs: e.target.value})}>
+                                        <Form.Select className="form-select" aria-label="Default select example" value={form.nbJoueurs} onChange={e => updateForm({nbJoueurs: parseInt(e.target.value)})}>
                                             <option>Choisissez</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -133,19 +132,13 @@ function NewPartie() {
                                         </Form.Select>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
-                                        Type de partie :
-                                        <Form.Select className="form-select" aria-label="Default select example" value={form.priv} onChange={e => updateForm({priv: e.target.value})}>
-                                            <option>Ici aussi</option>
-                                            <option value="private">Privée</option>
-                                            <option value="public">Publique</option>
-                                        </Form.Select>                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
                                         Vitesse de jeu :
                                         <Form.Select className="form-select" aria-label="Default select example" value={form.speed} onChange={e => updateForm({speed: e.target.value})}>
                                             <option>Encore là</option>
                                             <option value="normal">Normale</option>
                                             <option value="fast">Rapide</option>
-                                        </Form.Select>                                    </ListGroup.Item>
+                                        </Form.Select>                                    
+                                    </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         <Button type="submit" onClick={creationPartie} > Valider </Button>
                                     </ListGroup.Item>

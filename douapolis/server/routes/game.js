@@ -41,7 +41,6 @@ gameRoutes.route("/game/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
     nbJoueurs: req.body.nbJoueurs,
-    priv: req.body.priv,
     speed: req.body.speed,
     code: req.body.code,
     host: req.body.host,
@@ -59,7 +58,6 @@ gameRoutes.route("/update/:id").post(function (req, response) {
  let newvalues = {
    $set: {
     nbJoueurs: req.body.nbJoueurs,
-    priv: req.body.priv,
     speed: req.body.speed,
     code: req.body.code,
     host: req.body.host,
