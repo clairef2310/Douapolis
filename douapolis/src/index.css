@@ -117,3 +117,8 @@ body{
   position: relative;
   left : 25%;
 }
+.banque{
+  position: absolute;
+  left: -30%;
+  top: 20%;
+}
