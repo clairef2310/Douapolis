@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 import "./index.css";
 import { getUser } from "./testAuth/AuthApi";
 import { useNavigate } from "react-router-dom";
+import io from 'socket.io-client';
 
 function SalleAttente() {
   const navigate = useNavigate();
@@ -12,40 +13,27 @@ function SalleAttente() {
   const [host, setHost] = useState("");
   const [players, setPlayers] = useState([]);
 
-  async function fetchPlayers() {
-    const codePartie = window.location.search.substr(1);
-    const response = await fetch(`http://localhost:5000/game/${codePartie}`);
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.statusText}`;
-      window.alert(message);
-      return;
-    }
-    const game = await response.json();
-    setCode(game.code);
-    setHost(game.host);
-    console.log(game);
-    const nbJ = game.nbJoueurs;
-    //remplissage du tableau de joueur
-    if(nbJ===2){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-    if(nbJ===3){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(3)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-    if(nbJ===4){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(3)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(4)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-
-  }
-
   useEffect(() => {
-    fetchPlayers();
+    // Créer une instance de socket.io-client et se connecter au serveur
+    const socket = io('http://localhost:5000');
+
+    // Récupérer le code de partie à partir de l'URL
+    const codePartie = window.location.search.substr(1);
+
+    // Écouter l'événement "updatePlayers" pour mettre à jour la liste des joueurs
+    socket.on('updatePlayers', (game) => {
+      setCode(game.code);
+      setHost(game.host);
+      setPlayers(game.joueurs);
+    });
+
+    // Émettre l'événement "joinGame" pour rejoindre la salle d'attente
+    socket.emit('joinGame', codePartie);
+
+    // Nettoyer l'instance de socket lorsque le composant est démonté
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -61,7 +49,7 @@ function SalleAttente() {
           <p>Le code partie est : {code}</p>
           <p>L'hôte est : {host}</p>
           {players.map((player, index) => (
-            <p key={index}>{player.name}</p>
+            <p key={index}>{player}</p>
           ))}
         </div>
       </Container>
