@@ -49,45 +49,45 @@
 <!--Depart-->
   <text font-size="13" fill="red" x="645" y="650">Départ</text>
   <text font-size="13" fill="black" x="642" y="670">gagnez</text>
-  <text font-size="13" fill="black" x="653" y="690">...€</text>
+  <text font-size="13" fill="black" x="650" y="690">200€</text>
 
 <!--batiment violet-->
   <!--Nautibus-->
   <rect x="569" y="630" width="59" height="30" fill="#7100ae" stroke="black" stroke-width="2"/>
   <text x="574" y="650" font-size="13" fill="white">Nautibus</text>
-  <text x="588" y="685" font-size="15" fill="black">...€</text>
+  <text x="586" y="685" font-size="15" fill="black">60€</text>
   <!--Astrée-->
   <rect x="447" y="630" width="59" height="30" fill="#7100ae" stroke="black" stroke-width="2"/>
   <text x="455" y="650" font-size="15" fill="white">Astrée</text>
-  <text x="470" y="685" font-size="15" fill="black">...€</text>
+  <text x="464" y="685" font-size="15" fill="black">60€</text>
 
 <!--case bourse-->
   <text x="520" y="660" font-size="15" fill="black">Carte</text>
-  <text x="516" y="680" font-size="15" fill="black">Bourse</text>
+  <text x="515" y="680" font-size="15" fill="black">Bourse</text>
 
 <!--taxe cafet-->
   <text x="402" y="643" font-size="13" fill="red">Taxe</text>
   <text x="402" y="655" font-size="13" fill="red">Cafèt</text>
-  <text x="409" y="685" font-size="15" fill="black">...€</text>
+  <text x="400" y="685" font-size="15" fill="black">200€</text>
 
 <!--arret tram université lyon 1-->
   <text x="326" y="645" font-size="13" fill="black">Université </text>
   <text x="338" y="657" font-size="13" fill="black">Lyon 1 </text>
-  <text x="345" y="685" font-size="15" fill="black">...€</text>
+  <text x="339" y="685" font-size="15" fill="black">200€</text>
 
 <!--batiment bleu clair-->
   <!--Forel-->
   <rect x="264" y="630" width="59" height="30" fill="#00d3fc" stroke="black" stroke-width="2"/>
   <text x="278" y="650" font-size="15" fill="white">Forel</text>
-  <text x="285" y="685" font-size="15" fill="black">...€</text>
+  <text x="279" y="685" font-size="15" fill="black">100€</text>
   <!--Dubois-->
   <rect x="142" y="630" width="59" height="30" fill="#00d3fc" stroke="black" stroke-width="2"/>
   <text x="150" y="650" font-size="15" fill="white">Dubois</text>
-  <text x="165" y="685" font-size="15" fill="black">...€</text>
+  <text x="153" y="685" font-size="15" fill="black">100€</text>
   <!--Darwin-->
   <rect x="81" y="630" width="59" height="30" fill="#00d3fc" stroke="black" stroke-width="2"/>
   <text x="88" y="650" font-size="15" fill="white">Darwin</text>
-  <text x="100" y="685" font-size="15" fill="black">...€</text>
+  <text x="93" y="685" font-size="15" fill="black">120€</text>
 
 <!--case chance-->
   <text x="215" y="660" font-size="15" fill="black">Carte</text>
@@ -101,38 +101,38 @@
   <!--Berthollet-->
   <rect x="50" y="569" width="30" height="59" fill="#f01e92" stroke="black" stroke-width="2"/>
   <text font-size="12" fill="white" transform="translate(60, 573) rotate(90)">Berthollet</text>
-  <text font-size="15" fill="black" transform="translate(15, 593) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 583) rotate(90)">140€</text>
   <!--Thémis-->
   <rect x="50" y="447" width="30" height="59" fill="#f01e92" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(60, 452) rotate(90)">Thémis</text>
-  <text font-size="15" fill="black" transform="translate(15, 470) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 460) rotate(90)">140€</text>
   <!--Cryo-->
   <rect x="50" y="386" width="30" height="59" fill="#f01e92" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(60, 400) rotate(90)">Cryo</text>
-  <text font-size="15" fill="black" transform="translate(15, 410) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 400) rotate(90)">160€</text>
 
 <!--Case SSU-->
   <text font-size="13" fill="black" transform="translate(60, 525) rotate(90)">SSU</text>
-  <text font-size="15" fill="black" transform="translate(15, 532) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 522) rotate(90)">150€</text>
 
 <!--arret tram gaston berger-->
   <text font-size="13" fill="black" transform="translate(65, 336) rotate(90)">Gaston</text>
   <text font-size="13" fill="black" transform="translate(53, 336) rotate(90)">Berger</text>
-  <text font-size="15" fill="black" transform="translate(15, 347) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 340) rotate(90)">200€</text>
 
 <!--batiment orange-->
   <!--Jordan-->
   <rect x="50" y="264" width="30" height="59" fill="#fe6d27" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(60, 272) rotate(90)">Jordan</text>
-  <text font-size="15" fill="black" transform="translate(15, 285) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 278) rotate(90)">160€</text>
   <!--Grignard-->
   <rect x="50" y="142" width="30" height="59" fill="#fe6d27" stroke="black" stroke-width="2"/>
   <text font-size="13" fill="white" transform="translate(60, 147) rotate(90)">Grignard</text>
-  <text font-size="15" fill="black" transform="translate(15, 164) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 157) rotate(90)">160€</text>
   <!--Lippman-->
   <rect x="50" y="81" width="30" height="59" fill="#fe6d27" stroke="black" stroke-width="2"/>
   <text font-size="12" fill="white" transform="translate(60, 85) rotate(90)">Lippmann</text>
-  <text font-size="15" fill="black" transform="translate(15, 103) rotate(90)">...€</text>
+  <text font-size="15" fill="black" transform="translate(15, 97) rotate(90)">200€</text>
 
 <!--case bourse-->
   <text transform="translate(45, 215) rotate(90)" font-size="15" fill="black">Carte</text>
@@ -146,15 +146,15 @@
   <!--Géorde-->
   <rect x="81" y="50" width="59" height="30" fill="red" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(130,60 ) rotate(180)">Géode</text>
-  <text font-size="15" fill="black" transform="translate(119,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(126,15 ) rotate(180)">220€</text>
   <!--STAPS-->
   <rect x="203" y="50" width="59" height="30" fill="red" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(255,60 ) rotate(180)">STAPS</text>
-  <text font-size="15" fill="black" transform="translate(241,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(248,15 ) rotate(180)">220€</text>
   <!--Atlas-->
   <rect x="264" y="50" width="59" height="30" fill="red" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(310,60 ) rotate(180)">Atlas</text>
-  <text font-size="15" fill="black" transform="translate(303,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(311,15 ) rotate(180)">240€</text>
 
 <!--case chance-->
   <text transform="translate(188,50 ) rotate(180)" font-size="15" fill="black">Carte</text>
@@ -163,25 +163,25 @@
 <!--arret tram Insa Einstein-->
   <text font-size="13" fill="black" transform="translate(365, 68) rotate(180)">Insa</text>
   <text font-size="13" fill="black" transform="translate(375, 55) rotate(180)">Einstein</text>
-  <text font-size="15" fill="black" transform="translate(363,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(371,15 ) rotate(180)">200€</text>
 
 <!--batiment jaune-->
   <!--Ariane-->
   <rect x="386" y="50" width="59" height="30" fill="#fed725" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(435,60 ) rotate(180)">Ariane</text>
-  <text font-size="15" fill="black" transform="translate(424,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(432,15 ) rotate(180)">260€</text>
   <!--quai 43-->
   <rect x="447" y="50" width="59" height="30" fill="#fed725" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(500,60 ) rotate(180)">Quai 43</text>
-  <text font-size="15" fill="black" transform="translate(485,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(493,15 ) rotate(180)">260€</text>
   <!--Omega-->
   <rect x="569" y="50" width="59" height="30" fill="#fed725" stroke="black" stroke-width="2"/>
   <text font-size="15" fill="white" transform="translate(620,60 ) rotate(180)">Omega</text>
-  <text font-size="15" fill="black" transform="translate(606,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(614,15 ) rotate(180)">280€</text>
 
 <!--Case La soie -->
   <text font-size="13" fill="black" transform="translate(560, 60) rotate(180)">La SOIE</text>
-  <text font-size="15" fill="black" transform="translate(547,15 ) rotate(180)">...€</text>
+  <text font-size="15" fill="black" transform="translate(555,15 ) rotate(180)">150€</text>
 
 <!--aller en prison -->
   <text font-size="15" fill="black" transform="translate(690,75 ) rotate(-90)">Allez En</text>
@@ -191,15 +191,15 @@
   <!-- Déambu-->
   <rect x="631" y="81" width="30" height="59" fill="#006f00" stroke="black" stroke-width="2"/>
   <text font-size="14" fill="white" transform="translate(650, 135) rotate(-90)">Déambu</text>
-  <text font-size="15" fill="black" transform="translate(685, 120) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 128) rotate(-90)">300€</text>
   <!--Braconnier-->
   <rect x="631" y="142" width="30" height="59" fill="#006f00" stroke="black" stroke-width="2"/>
   <text font-size="11" fill="white" transform="translate(650, 196) rotate(-90)">Braconnier</text>
-  <text font-size="15" fill="black" transform="translate(685, 183) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 191) rotate(-90)">300€</text>
   <!--Lwoff-->
   <rect x="631" y="264" width="30" height="59" fill="#006f00" stroke="black" stroke-width="2"/>
   <text font-size="14" fill="white" transform="translate(650, 310) rotate(-90)">Lwoff</text>
-  <text font-size="15" fill="black" transform="translate(685, 303) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 311) rotate(-90)">320€</text>
 
 <!--case bourse-->
   <text transform="translate(660, 250) rotate(-90)" font-size="15" fill="black">Carte</text>
@@ -208,7 +208,7 @@
   <!--arret tram Croix Luizet -->
   <text font-size="13" fill="black" transform="translate(643, 365) rotate(-90)">Insa</text>
   <text font-size="13" fill="black" transform="translate(655, 374) rotate(-90)">Einstein</text>
-  <text font-size="15" fill="black" transform="translate(685, 365) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 373) rotate(-90)">200€</text>
 
 <!--case chance-->
   <text transform="translate(660, 435) rotate(-90)" font-size="15" fill="black">Carte</text>
@@ -218,16 +218,16 @@
   <!--Raulin-->
   <rect x="631" y="447" width="30" height="59" fill="#00007a" stroke="black" stroke-width="2"/>
   <text font-size="14" fill="white" transform="translate(650, 496) rotate(-90)">Raulin</text>
-  <text font-size="15" fill="black" transform="translate(685, 485) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 493) rotate(-90)">350€</text>
   <!--Chevreul-->
   <rect x="631" y="569" width="30" height="59" fill="#00007a" stroke="black" stroke-width="2"/>
   <text font-size="13" fill="white" transform="translate(650, 623) rotate(-90)">Chevreul</text>
-  <text font-size="15" fill="black" transform="translate(685, 610) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 616) rotate(-90)">400€</text>
 
 <!--taxe restaurant universitaire-->
   <text transform="translate(643, 550) rotate(-90)" font-size="13" fill="red">Taxe</text>
   <text transform="translate(655, 558) rotate(-90)" font-size="13" fill="red">Resto U</text>
-  <text font-size="15" fill="black" transform="translate(685, 548) rotate(-90)">..€</text>
+  <text font-size="15" fill="black" transform="translate(685, 555) rotate(-90)">200€</text>
 
 <!--plateau central-->
   <g transform="rotate(-45) translate(-370,135)">
