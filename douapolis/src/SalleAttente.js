@@ -8,11 +8,11 @@ import io from "socket.io-client";
 
 function SalleAttente() {
   const navigate = useNavigate();
-
   const [code, setCode] = useState("");
   const [host, setHost] = useState("");
   const [socket, setSocket] = useState(null);
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState({players: []});
+  const [nbJ, setNbJ] = useState(null);
 
   async function fetchPlayers() {
     const codePartie = window.location.search.substr(1);
@@ -25,19 +25,11 @@ function SalleAttente() {
     const game = await response.json();
     setCode(game.code);
     setHost(game.host);
-    const nbJ = game.nbJoueurs;
-    //setPlayers(game.joueurs);
-    /*
-    if (game.nbJoueurs >= nbJ) {
-      window.alert("La partie est pleine.");
-      navigate("/");
-    }
-    */
+    setNbJ(game.nbJoueurs);
   }
 
   useEffect(() => {
     fetchPlayers();
-
     // Connexion à socket.io
     const socket = io("http://localhost:5000", { transports: ["websocket"] });
     setSocket(socket);
@@ -45,7 +37,8 @@ function SalleAttente() {
     socket.on("update-players", (joueurs) => {
       console.log('Received updated player list:', joueurs);
       setPlayers(joueurs);
-      console.log(players);
+      // Mettre à jour l'affichage des joueurs connectés
+      joueursCo();
     });
 
     socket.emit("join-room", { roomId: code, username: getUser() });
@@ -57,20 +50,73 @@ function SalleAttente() {
   }, [code]);
 
   function startGame() {
-    socket.emit("start-game", code);
+    navigate(`/Jeu?${code}`, {replace : true});
   }
 
   function joueursCo() {
-    return (
-      <div>
-        <p>Joueurs</p>
-      </div>
-    );
+    if (players.players.length === 0) {
+      return <p>Aucun joueur connecté.</p>;
+    }
+  
+    const nb = nbJ;
+  
+    if (nb === 2) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+        </div>
+      );
+    }
+    if (nb === 3) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+          <p>Joueur 3 : {players.players[2]}</p>
+        </div>
+      );
+    }
+    if (nb === 4) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+          <p>Joueur 3 : {players.players[2]}</p>
+          <p>Joueur 4 : {players.players[3]}</p>
+        </div>
+      );
+    }
   }
-/*<p> Joueur 1 : {players.players[0]}
-        <br/>Joueur 2 : {players.players[1]}
-        <br/>Joueur 3 : {players.players[2]}
-        <br/>Joueur 4 : {players.players[3]}</p>*/
+  
+  function partiePleine() {
+    if (players.players.length === nbJ) {
+      if(getUser() === host){
+        return (
+          <div>
+            <p>La Partie est complete.</p>;
+            <button onClick={startGame}>Commencer la partie</button>
+          </div>
+        )
+      }
+      else {
+        return (
+          <div>
+            <p>La Partie est complete.</p>;
+            <p>Nous attendons que l'hote lance.</p>;
+          </div>
+        )
+      }
+    }
+    else {
+      return (
+        <div>
+          <p>Nous attendons la partie soit pleine.</p>
+        </div>
+      )
+    }
+  }
+
   return (
     <div className="body">
       <Navigation />
@@ -78,13 +124,13 @@ function SalleAttente() {
         <div className="Douapolis">
           <center>
             <h1> Salle d'attente</h1>
-            <button onClick={startGame}>Commencer la partie</button>
           </center>
         </div>
         <div className="Centre">
           <p>Le code partie est : {code}</p>
           <p>L'hôte est : {host}</p>
           {joueursCo()}
+          {partiePleine()}
         </div>
       </Container>
     </div>
