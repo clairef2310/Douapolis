@@ -79,52 +79,9 @@ io.on('connection', (socket) => {
       io.in(roomId).emit('update-players', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
     }
   });
-  
-  // Join game event
-  socket.on('join-game', ({ roomId, username }) => {
-    console.log(`User ${username} wants to join the game in room ${roomId}`);
 
-    // Check if the player has already joined the room
-    const alreadyJoined = rooms[roomId].players.some(playerId => playerId === socket.id);
-    if (alreadyJoined) {
-      console.log(`User ${username} has already joined room ${roomId}`);
-      return;
-    }
+});
 
-    // Notify other players in the room of the player joining the game
-    socket.broadcast.to(roomId).emit('player-joined-game', { username });
-
-    // Add the player to the room
-    rooms[roomId].players.push(socket.id);
-
-    // Notify other players in the room of the new player
-    socket.broadcast.to(roomId).emit('new-player', { username });
-
-    // Join the room
-    socket.join(roomId);
-
-    // Send the room information to the client
-    socket.emit('room-info', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
-
-    // Send the updated list of players to all players in the room
-    io.in(roomId).emit('update-players', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
-
-    });
-
-    // Disconnect event
-    socket.on('disconnect', () => {
-      console.log('a user disconnected');
-  
-      // Remove the player from the room and memory
-      const player = players[socket.id];
-      if (player) {
-        const roomId = player.roomId;
-        rooms[roomId].players = rooms[roomId].players.filter((p) => p !== socket.id);
-        delete players[socket.id];
-        socket.broadcast.to(roomId).emit('player-left', { username: player.username });
-      }
-    });
-  });
 // Connect to database and start the server
 dbo.connectToServer(function (err) {
   if (err) console.error(err);
