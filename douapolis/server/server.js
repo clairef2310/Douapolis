@@ -59,8 +59,15 @@ io.on('connection', (socket) => {
     // Send the room information to the client
     socket.emit('room-info', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
 
+    socket.on("start-game", ({ roomId }) => {
+      console.log(`Starting game in room ${roomId}`);
+      io.to(roomId).emit("redirect-to-game", `/Jeu?${roomId}`); // émettre l'événement "redirect-to-game" à tous les clients connectés à la salle
+    });
+
     // Send the updated list of players to all players in the room
-    io.in(roomId).emit('update-players', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
+    io.in(roomId).emit('update-players-co', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
+
+    io.in(roomId).emit('nb-players-co', { nb: rooms[roomId].players.length});
   });
 
   // Disconnect event
@@ -91,3 +98,4 @@ dbo.connectToServer(function (err) {
     });
   }
 });
+

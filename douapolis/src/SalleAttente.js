@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container ,ListGroup, Button} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Navigation from "./Navigation";
 import "./index.css";
@@ -10,10 +10,10 @@ function SalleAttente() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [host, setHost] = useState("");
-  // eslint-disable-next-line
   const [socket, setSocket] = useState(null);
-  const [players, setPlayers] = useState({players: []});
+  const [tab, setPlayers] = useState({players: []});
   const [nbJ, setNbJ] = useState(null);
+  let nbJoueursCo =0;
 
   async function fetchPlayers() {
     const codePartie = window.location.search.substr(1);
@@ -27,85 +27,89 @@ function SalleAttente() {
     setCode(game.code);
     setHost(game.host);
     setNbJ(game.nbJoueurs);
+    nbJoueursCo = game.nbJoueursCo;
   }
 
   useEffect(() => {
     fetchPlayers();
-    // Connexion à socket.io
-    const socket = io("http://localhost:5000", { transports: ["websocket"] });
-    setSocket(socket);
+    if (code) {
+      const socket = io("http://localhost:5000", { transports: ["websocket"] });
+      setSocket(socket);
+  
+      socket.on("update-players-co", (joueurs) => {
+        setPlayers(joueurs);
+        async function test(){
+          const codePartie = window.location.search.substr(1);
+          nbJoueursCo = nbJoueursCo /*+ 1 je n'arrive pas a gerer le -1 a la deconnection*/;
+          const modifGame = {nbJoueurs : nbJ, code : code, host : host, nbJoueursCo : nbJoueursCo};
+          await fetch(`http://localhost:5000/updateGame/${codePartie}`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(modifGame),
+          })
+          .catch(error => {
+              window.alert(error);
+              return;
+          });
+        }
+        test();
+      });
+      
+      socket.emit("join-room", { roomId: code, username: getUser() }); 
 
-    socket.on("update-players", (joueurs) => {
-      console.log('Received updated player list:', joueurs);
-      setPlayers(joueurs);
-      // Mettre à jour l'affichage des joueurs connectés
-      joueursCo();
-    });
-
-    socket.emit("join-room", { roomId: code, username: getUser() });
-
-    return () => {
-      socket.emit("leave-room", { roomId: code, username: getUser() });
-      socket.disconnect();
+      return () => {
+        socket.disconnect();
+      };
     };
     // eslint-disable-next-line
   }, [code]);
 
   function startGame() {
-    navigate(`/Jeu?${code}`, {replace : true});
+    socket.emit("start-game", { roomId: code }); // émettre l'événement "start-game" sur la socket
+  }
+
+  if(socket!==null){
+    socket.on("redirect-to-game", (gameUrl) => {
+      navigate(gameUrl, { replace: true }); // rediriger les joueurs vers la page de jeu
+    });
   }
 
   function joueursCo() {
-    if (players.players.length === 0) {
+    if (nbJ === 0) {
       return <p>Aucun joueur connecté.</p>;
     }
   
-    const nb = nbJ;
+    const items = [];
+    for (let i = 0; i < nbJ; i++) {
+      items.push(
+        <ListGroup.Item key={i} as="li">
+          Joueur {i + 1} : {tab.players[i]}
+        </ListGroup.Item>
+      );
+    }
   
-    if (nb === 2) {
-      return (
-        <div>
-          <p>Joueur 1 : {players.players[0]}</p>
-          <p>Joueur 2 : {players.players[1]}</p>
-        </div>
-      );
-    }
-    if (nb === 3) {
-      return (
-        <div>
-          <p>Joueur 1 : {players.players[0]}</p>
-          <p>Joueur 2 : {players.players[1]}</p>
-          <p>Joueur 3 : {players.players[2]}</p>
-        </div>
-      );
-    }
-    if (nb === 4) {
-      return (
-        <div>
-          <p>Joueur 1 : {players.players[0]}</p>
-          <p>Joueur 2 : {players.players[1]}</p>
-          <p>Joueur 3 : {players.players[2]}</p>
-          <p>Joueur 4 : {players.players[3]}</p>
-        </div>
-      );
-    }
+    return <div>{items}</div>;
   }
   
   function partiePleine() {
-    if (players.players.length === nbJ) {
+    if (tab.players.length === nbJ) {
       if(getUser() === host){
         return (
           <div>
-            <p>La Partie est complete.</p>;
-            <button onClick={startGame}>Commencer la partie</button>
+            <ListGroup.Item as="li">
+              <Button onClick={startGame} variant='success'>Commencer la partie</Button>
+            </ListGroup.Item>
           </div>
         )
       }
       else {
         return (
           <div>
-            <p>La Partie est complete.</p>;
-            <p>Nous attendons que l'hote lance.</p>;
+            <ListGroup.Item as="li">
+              Nous attendons que l'hote lance le jeu.
+            </ListGroup.Item>
           </div>
         )
       }
@@ -113,7 +117,9 @@ function SalleAttente() {
     else {
       return (
         <div>
-          <p>Nous attendons la partie soit pleine.</p>
+            <ListGroup.Item as="li">
+              Nous attendons la partie soit pleine.
+            </ListGroup.Item>
         </div>
       )
     }
@@ -125,14 +131,17 @@ function SalleAttente() {
       <Container>
         <div className="Douapolis">
           <center>
-            <h1> Salle d'attente</h1>
+            <h1> Salle d'attente de {host}</h1>
           </center>
         </div>
-        <div className="Centre">
-          <p>Le code partie est : {code}</p>
-          <p>L'hôte est : {host}</p>
+        <div className="Attente">
+        <ListGroup as="ul" align='center'>
+          <ListGroup.Item as="li" active>
+            Le code partie est : {code}
+          </ListGroup.Item>
           {joueursCo()}
           {partiePleine()}
+        </ListGroup>
         </div>
       </Container>
     </div>

@@ -11,7 +11,6 @@ import voiture from './images/voiture.png'
 function Jeu() {
 
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
-    const [nomJeu, setnomJeu] = useState('DOUAPOLI$');    
     const [de1, setde1] = useState();
     const [de2, setde2] = useState();
     const [total, setTotal] = useState();
@@ -41,11 +40,6 @@ function Jeu() {
     //coordonnée case départ 
     //position x : 640
     //position y : 630 
-
-    //fonction de changement nom Douapoli$
-    async function changer(){
-        setnomJeu("Projet Informatique");
-    };
 
     async function avancerPion(){
        //fonction de choix aléatoir du dé
@@ -150,12 +144,12 @@ function Jeu() {
     
     //formulaire et titre afficher sur la page 
     return(
-        <div class="entete">
+        <div className="entete">
         <Navigation/> 
             <Container>
-                <div class="Douapolis">
-                    <center><h1 id="modif" title="Cliquez moi dessus, je suis changeant !" onclick={changer}>{nomJeu}</h1></center>
-                </div> 
+                <div className="Douapolis">
+                    <center><h1> DOUAPOLI$ </h1></center>
+                </div>
                 <div className="plateau">
                     <ReactLogo/>
                         <div className="nbaleatoir">

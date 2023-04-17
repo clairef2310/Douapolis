@@ -41,9 +41,9 @@ gameRoutes.route("/game/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
     nbJoueurs: req.body.nbJoueurs,
-    speed: req.body.speed,
     code: req.body.code,
     host: req.body.host,
+    nbJoueursCo: req.body.nbJoueursCo
  };
  db_connect.collection("game").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -52,15 +52,15 @@ gameRoutes.route("/game/add").post(function (req, response) {
 });
  
 // This section will help you update a game by id.
-gameRoutes.route("/updateGame/:id").post(function (req, response) {
+gameRoutes.route("/updateGame/:code").post(function (req, response) {
  let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
+ let myquery = { code: req.params.code };
  let newvalues = {
    $set: {
     nbJoueurs: req.body.nbJoueurs,
-    speed: req.body.speed,
     code: req.body.code,
     host: req.body.host,
+    nbJoueursCo: req.body.nbJoueursCo
    },
  };
  db_connect

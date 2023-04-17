@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import './index.css' 
 import { hasAuthenticated } from "./testAuth/AuthApi";
 import { UserContext } from "./testAuth/userAuth";
+
 //page d'accueil du jeu
 
 function Accueil() {
@@ -25,7 +26,13 @@ function Accueil() {
             if (game) {
                 var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
                 if( val === true ) {
-                    navigate(`/SalleAttente?${codePartie}`, {replace : true});
+
+                    if(game.nbJoueursCo===game.nbJoueurs){
+                        alert("Cette partie est pleine");
+                    }
+                    else{
+                        navigate(`/SalleAttente?${codePartie}`, {replace : true});
+                    }
                 }
             }
             else{

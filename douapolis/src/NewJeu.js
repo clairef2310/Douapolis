@@ -9,9 +9,9 @@ function NewPartie() {
     //Variable permettant de récupérer et utiliser les données lors d'un changement d'état
     const [form, setForm] = useState({
         nbJoueurs: 0,
-        speed: "",
         code : "",
         host : "",
+        nbJoueursCo: 0,
     });
 
     const [user, setUser] = useState({
@@ -29,7 +29,7 @@ function NewPartie() {
     // This function will handle the submission.
 
     async function creationPartie(event){
-        if(form.nbJoueurs !== '' && form.speed !== ''){
+        if(form.nbJoueurs !== ''){
             event.preventDefault();
             const codePartie = generateCode();
             form.code = codePartie;
@@ -74,7 +74,7 @@ function NewPartie() {
                 return;
             });
             setUser({pseudo : "", mdp : "", myGame : ""});
-            setForm({ nbJoueurs: 0, speed: "", code : "", host : ""});
+            setForm({ nbJoueurs: 0, code : "", host : "", nbJoueursCo: 0});
             navigate(`/SalleAttente?${codePartie}`, {replace : true});
         }
         else{
@@ -128,14 +128,6 @@ function NewPartie() {
                                             <option value="3">3</option>
                                             <option value="4">4</option>
                                         </Form.Select>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        Vitesse de jeu :
-                                        <Form.Select className="form-select" aria-label="Default select example" value={form.speed} onChange={e => updateForm({speed: e.target.value})}>
-                                            <option>Encore là</option>
-                                            <option value="normal">Normale</option>
-                                            <option value="fast">Rapide</option>
-                                        </Form.Select>                                    
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         <Button type="submit" onClick={creationPartie} > Valider </Button>
