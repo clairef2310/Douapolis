@@ -52,7 +52,7 @@ gameRoutes.route("/game/add").post(function (req, response) {
 });
  
 // This section will help you update a game by id.
-gameRoutes.route("/update/:id").post(function (req, response) {
+gameRoutes.route("/updateGame/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {

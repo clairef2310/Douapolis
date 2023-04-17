@@ -4,13 +4,15 @@ import Navigation from "./Navigation";
 import "./index.css";
 import { getUser } from "./testAuth/AuthApi";
 import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 
 function SalleAttente() {
   const navigate = useNavigate();
-
   const [code, setCode] = useState("");
   const [host, setHost] = useState("");
-  const [players, setPlayers] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const [players, setPlayers] = useState({players: []});
+  const [nbJ, setNbJ] = useState(null);
 
   async function fetchPlayers() {
     const codePartie = window.location.search.substr(1);
@@ -23,30 +25,97 @@ function SalleAttente() {
     const game = await response.json();
     setCode(game.code);
     setHost(game.host);
-    console.log(game);
-    const nbJ = game.nbJoueurs;
-    //remplissage du tableau de joueur
-    if(nbJ===2){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-    if(nbJ===3){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(3)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-    if(nbJ===4){
-        setPlayers([...Array(1)].map((_, i) => ({ name: game.host })));
-        setPlayers([...Array(2)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(3)].map((_, i) => ({ name: `Player ${i + 2}` })));
-        setPlayers([...Array(4)].map((_, i) => ({ name: `Player ${i + 2}` })));
-    }
-
+    setNbJ(game.nbJoueurs);
   }
 
   useEffect(() => {
     fetchPlayers();
-  }, []);
+    // Connexion à socket.io
+    const socket = io("http://localhost:5000", { transports: ["websocket"] });
+    setSocket(socket);
+
+    socket.on("update-players", (joueurs) => {
+      console.log('Received updated player list:', joueurs);
+      setPlayers(joueurs);
+      // Mettre à jour l'affichage des joueurs connectés
+      joueursCo();
+    });
+
+    socket.emit("join-room", { roomId: code, username: getUser() });
+
+    return () => {
+      socket.emit("leave-room", { roomId: code, username: getUser() });
+      socket.disconnect();
+    };
+  }, [code]);
+
+  function startGame() {
+    navigate(`/Jeu?${code}`, {replace : true});
+  }
+
+  function joueursCo() {
+    if (players.players.length === 0) {
+      return <p>Aucun joueur connecté.</p>;
+    }
+  
+    const nb = nbJ;
+  
+    if (nb === 2) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+        </div>
+      );
+    }
+    if (nb === 3) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+          <p>Joueur 3 : {players.players[2]}</p>
+        </div>
+      );
+    }
+    if (nb === 4) {
+      return (
+        <div>
+          <p>Joueur 1 : {players.players[0]}</p>
+          <p>Joueur 2 : {players.players[1]}</p>
+          <p>Joueur 3 : {players.players[2]}</p>
+          <p>Joueur 4 : {players.players[3]}</p>
+        </div>
+      );
+    }
+  }
+  
+  function partiePleine() {
+    if (players.players.length === nbJ) {
+      if(getUser() === host){
+        return (
+          <div>
+            <p>La Partie est complete.</p>;
+            <button onClick={startGame}>Commencer la partie</button>
+          </div>
+        )
+      }
+      else {
+        return (
+          <div>
+            <p>La Partie est complete.</p>;
+            <p>Nous attendons que l'hote lance.</p>;
+          </div>
+        )
+      }
+    }
+    else {
+      return (
+        <div>
+          <p>Nous attendons la partie soit pleine.</p>
+        </div>
+      )
+    }
+  }
 
   return (
     <div className="body">
@@ -60,9 +129,8 @@ function SalleAttente() {
         <div className="Centre">
           <p>Le code partie est : {code}</p>
           <p>L'hôte est : {host}</p>
-          {players.map((player, index) => (
-            <p key={index}>{player.name}</p>
-          ))}
+          {joueursCo()}
+          {partiePleine()}
         </div>
       </Container>
     </div>

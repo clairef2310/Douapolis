@@ -61,8 +61,6 @@ function NewPartie() {
             user.pseudo = users.pseudo;
             user.mdp = users.mdp;
             user.myGame = form.code;
-            console.log(users);
-            console.log(user);
             const modifPerson = { ...user };
             await fetch(`http://localhost:5000/update/${form.host}`, {
                 method: "POST",
