@@ -4,22 +4,30 @@ import Accueil from './Accueil';
 import Profil from './Profil';
 import Jeu from './Jeu'
 import NewCompte from './NewCompte';
+import Parametres from './Parametres';
 import NewJeu from './NewJeu';
+import SalleAttente from './SalleAttente';
+import { UserProvider } from './testAuth/userAuth';
+import AjoutStats from './AjoutStats';
 
 function App() {
-
     //routes qui vont permettre de naviguer dans l'application
     return (
         <div>
             <Router>
+                <UserProvider>
                     <Routes>
                         <Route  path='/' element={<Accueil/>} />
                         <Route  path='/Connexion' element={<Connexion/>} />   
+                        <Route  path='/Parametres' element={<Parametres/>} /> 
                         <Route  path='/Jeu' element={<Jeu/>} />   
-                        <Route  path='/Profil' element={<Profil/>} />         
+                        <Route  path='/Profil/' element={<Profil/>} />         
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
+                        <Route  path='/SalleAttente' element={<SalleAttente/>} />
+                        <Route  path='/AjoutStats' element={<AjoutStats/>} />                 
                     </Routes>
+                </UserProvider>
             </Router>
         </div>
     );
