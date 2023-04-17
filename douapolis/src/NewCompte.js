@@ -67,6 +67,8 @@ function NewCompte() {
         }
     };
 
+
+
     //formulaire et titre afficher sur la page 
     return(
         <div className="body">
@@ -75,28 +77,36 @@ function NewCompte() {
                     <div className="Douapolis">
                         <center><h1> DOUAPOLI$ </h1></center>
                     </div>
-                    <div className="Centre">                       
-                        <Row className="row h-100 justify-content-center align-items-center">
-                            <Col xs={5} align='center'>
-                                <ListGroup as="ul">
-                                    <ListGroup.Item as="li" active>
-                                        Création de mon compte
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        <Form.Control type="username" placeholder="Saisissez un pseudo" value={form.pseudo} onChange={e => updateForm({pseudo : e.target.value})}/>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                    <Form.Control type="password" placeholder="Saisissez un mot de passe" value={form.mdp} onChange={e => updateForm({mdp : e.target.value})}/>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        <Form.Control type="password" placeholder="Saisissez un mot de passe" value={mdp2} onChange={e => setmdp2(e.target.value)}/>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                    <Button type="submit" onClick={creationCompte} > Valider </Button>
-                                    </ListGroup.Item>
-                                </ListGroup>
-                            </Col>
-                        </Row>                  
+
+                    <div class="Centre">                       
+                        <div class="Inscription">                   
+                            <Form.Label> 
+                                Email
+                                <br/>
+                                <Form.Control type="email" placeholder="Saisissez un email" value={email} onChange={e => setemail(e.target.value)}/>                              
+                            </Form.Label>
+                            {/*le pseudo doit être unique (a gérer avec express) */}
+                            <Form.Label> 
+                            Pseudo
+                            <br/>
+                            <Form.Control type="username" placeholder="Saisissez un pseudo" value={pseudo} onChange={e => setpseudo(e.target.value)}/>
+                            </Form.Label>
+                            <Form.Label> 
+                                Mot de passe 
+                                <br/>
+                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={pass} onChange={e => setpass(e.target.value)}/>
+                            </Form.Label>
+                            {/*les deux mot de passe doivent être les mêmes (peut etre fait directement dans le front) */}
+                            <Form.Label> 
+                                Confirmer votre mot de passe 
+                                <br/>
+                                <Form.Control type="password" placeholder="Saisissez un mot de passe" value={pass2} onChange={e => setpass2(e.target.value)}/>
+                            </Form.Label>
+                        </div>
+                        
+                        <div class="button2">
+                            <Button type="submit" onClick={creationCompte} > Valider </Button>
+                        </div>
                     </div>
                 </Container>
         </div>
