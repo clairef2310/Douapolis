@@ -137,10 +137,12 @@ ne prend pas tout l'écran, il faudrait mettre un footer qui se colle à la dern
   position: relative;
   left : 25%;
 }
+
 .banque{
   position: absolute;
   left: -30%;
   top: 20%;
+}
 
 p{
   color: #000000;

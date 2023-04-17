@@ -10,6 +10,7 @@ function SalleAttente() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [host, setHost] = useState("");
+  // eslint-disable-next-line
   const [socket, setSocket] = useState(null);
   const [players, setPlayers] = useState({players: []});
   const [nbJ, setNbJ] = useState(null);
@@ -47,6 +48,7 @@ function SalleAttente() {
       socket.emit("leave-room", { roomId: code, username: getUser() });
       socket.disconnect();
     };
+    // eslint-disable-next-line
   }, [code]);
 
   function startGame() {

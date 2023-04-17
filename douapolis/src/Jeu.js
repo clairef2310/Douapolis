@@ -34,6 +34,7 @@ function Jeu() {
     const [indvoit, setIndvoit] = useState(0)
     const [indbat, setIndbat] = useState(0)
     const [indchien, setIndchien] = useState(0)
+    // eslint-disable-next-line
     const [solde, setSolde] = useState(1680);
 
 
