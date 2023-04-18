@@ -32,6 +32,8 @@ export default function AjoutStats() {
         }
     
         const records = await response.json();
+
+        console.log((Object.values(records[0])).length);
         
         const newPerson = { ...form };
    
@@ -44,7 +46,7 @@ export default function AjoutStats() {
          break;
        }
      }
-     console.log(UserModified);
+     //console.log(UserModified);
 
      if(!UserAlreadyRegister){
       await fetch("http://localhost:5000/stats/add", {
@@ -68,7 +70,7 @@ export default function AjoutStats() {
         achats: (parseInt(form.achats) + parseInt(UserModified.achats)).toString(),
         argents: (parseInt(form.argents) + parseInt(UserModified.argents)).toString(),
       };
-      console.log(editedPerson);
+      //console.log(editedPerson);
 
       await fetch(`http://localhost:5000/updateStats/${UserModified.name}`, {
         method: "POST",

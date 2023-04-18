@@ -108,6 +108,18 @@ export default function Profil() {
         );
       }
 
+    function AfficherAmis(){
+        return (
+            <><ListGroup.Item as="li">
+                Iona
+            </ListGroup.Item><ListGroup.Item as="li">
+                Mathis
+            </ListGroup.Item><ListGroup.Item as="li">
+                Romain
+            </ListGroup.Item></>
+        );
+    }
+
     //formulaire et titre afficher sur la page 
     return(
         <div className="body">
@@ -130,15 +142,7 @@ export default function Profil() {
                             <ListGroup.Item as="li" active className="center">
                                 Amis
                             </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                               Iona
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Mathis
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Romain
-                            </ListGroup.Item>
+                            {AfficherAmis()}
                         </ListGroup>
                     </div>
                     <div>
