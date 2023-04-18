@@ -36,7 +36,6 @@ function Jeu() {
     // eslint-disable-next-line
     const [solde, setSolde] = useState(1680);
 
-
     //coordonnée case départ 
     //position x : 640
     //position y : 630 
