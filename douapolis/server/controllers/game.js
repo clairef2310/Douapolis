@@ -77,7 +77,6 @@ exports.playerAt = (req, res, next) => {
     let propName = req.body.property;
 }
 
-//retourne l'agrent restant
 exports.buyProperty = (req, res, next) => {
     let db_connect = dbo.getDb();
     let gameQuery = { code: req.body.gameCode };
@@ -125,43 +124,61 @@ exports.buyProperty = (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 }
 
-//TODO check proprietaire groupe, construction uniforme
-exports.build = (req, res, next) => {
-    console.log(req.body);
+exports.build = async function build(req, res, next) {
     let db_connect = dbo.getDb();
 
-    let gameQuery = { code: req.body.gameCode };
-    let propertyQuery = { adress: req.body.propertyAdress };
-    let playerQuery = { pseudo: req.body.player };
+    let gameQuery = {};
+    let playerQuery = {};
+    let propertyQuery = {};
+
+    try {
+        gameQuery = { code: req.body.gameCode };
+        propertyQuery = { adress: req.body.propertyAdress };
+        playerQuery = { pseudo: req.body.player };
+    } catch (e) {
+        res.status(400).json(
+            { error: "Unable to build on this property: not enough information passed"}
+        );
+        return;
+    }
+
+    let player = await db_connect.collection("users").findOne(playerQuery);
+    let property = await db_connect.collection("properties").findOne(propertyQuery);
+    let game = await db_connect.collection("game").findOne(gameQuery);
+
+    let groupProperties = await db_connect
+        .collection("properties")
+        .find({ group: property.group })
+        .toArray();
+
+    if (game.owners[property.adress] !== player.pseudo) {
+        res.status(409).json(
+            { error: "Unable to built on this property: player is not the owner"}
+        );
+        return;
+    }
+
+    try {
+        groupProperties.forEach((prop) => {
+            if (prop.adress !== property.adress
+                && game.buildings[property.adress] - game.buildings[prop.adress] == 1
+            ) {
+                throw 1;
+            }
+        });
+    } catch(e) {
+        res.status(400).json(
+            { error: "Unable to build on this property: uneven building" }
+        );
+        return;
+    }
+
+    player.money -= property.buildingCost;
+    game.buildings[property.adress] += 1;
 
     db_connect
-    .collection("users")
-    .findOne(playerQuery)
-    .then((player) => {
-        db_connect
-        .collection("properties")
-        .findOne(propertyQuery)
-        .then((property) => {
-            db_connect
-            .collection("game")
-            .findOne(gameQuery)
-            .then((game) => {
+    .collection("game")
+    .updateOne(gameQuery, { $set: game })
+    .then(() => res.status(200).json({ message: "House built" }));
 
-                if (game.owners[property.adress] !== player.pseudo) {
-                    throw "The player is not the owner of this property";
-                }
-
-                player.money -= property.buildingCost;
-                game.buildings[property.adress] += 1;
-
-                db_connect
-                .collection("game")
-                .updateOne(gameQuery, { $set: game })
-                .then(() => res.status(200).json({ message: "House built" }));
-            })
-            .catch((err) => res.status(400).json({message: err}));
-        })
-        .catch(() => res.status(500).json({message: err}));
-    })
-    .catch(() => res.status(500).json({message: err}));
 }
