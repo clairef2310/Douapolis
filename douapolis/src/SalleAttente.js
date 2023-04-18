@@ -13,9 +13,9 @@ function SalleAttente() {
   const [socket, setSocket] = useState(null);
   const [tab, setPlayers] = useState({players: []});
   const [nbJ, setNbJ] = useState(null);
-  let nbJoueursCo =0;
+  const [nbJoueursCo, setNbJoueursCo] = useState(null);
 
-  async function fetchPlayers() {
+  async function fetchPartie() {
     const codePartie = window.location.search.substr(1);
     const response = await fetch(`http://localhost:5000/game/${codePartie}`);
     if (!response.ok) {
@@ -27,11 +27,11 @@ function SalleAttente() {
     setCode(game.code);
     setHost(game.host);
     setNbJ(game.nbJoueurs);
-    nbJoueursCo = game.nbJoueursCo;
+    setNbJoueursCo(game.nbJoueursCo);
   }
 
   useEffect(() => {
-    fetchPlayers();
+    fetchPartie();
     if (code) {
       const socket = io("http://localhost:5000", { transports: ["websocket"] });
       setSocket(socket);
@@ -40,7 +40,7 @@ function SalleAttente() {
         setPlayers(joueurs);
         async function test(){
           const codePartie = window.location.search.substr(1);
-          nbJoueursCo = nbJoueursCo /*+ 1 je n'arrive pas a gerer le -1 a la deconnection*/;
+          setNbJoueursCo(nbJoueursCo); /*+ 1 je n'arrive pas a gerer le -1 a la deconnection*/;
           const modifGame = {nbJoueurs : nbJ, code : code, host : host, nbJoueursCo : nbJoueursCo};
           await fetch(`http://localhost:5000/updateGame/${codePartie}`, {
               method: "POST",
@@ -83,11 +83,20 @@ function SalleAttente() {
   
     const items = [];
     for (let i = 0; i < nbJ; i++) {
-      items.push(
-        <ListGroup.Item key={i} as="li">
-          Joueur {i + 1} : {tab.players[i]}
-        </ListGroup.Item>
-      );
+      if(tab.players[i]!==undefined){
+        items.push(
+          <ListGroup.Item key={i} as="li">
+            Joueur {i + 1} : {tab.players[i]}
+          </ListGroup.Item>
+        );
+      }
+      else {
+        items.push(
+          <ListGroup.Item key={i} as="li">
+            Joueur {i + 1} : En attente du joueur {i+1}
+          </ListGroup.Item>
+        );
+      }
     }
   
     return <div>{items}</div>;
