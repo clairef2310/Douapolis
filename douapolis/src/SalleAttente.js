@@ -10,10 +10,9 @@ function SalleAttente() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [host, setHost] = useState("");
-  const [socket, setSocket] = useState(null);
   const [tab, setPlayers] = useState({players: []});
   const [nbJ, setNbJ] = useState(null);
-  const [nbJoueursCo, setNbJoueursCo] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   async function fetchPartie() {
     const codePartie = window.location.search.substr(1);
@@ -27,7 +26,6 @@ function SalleAttente() {
     setCode(game.code);
     setHost(game.host);
     setNbJ(game.nbJoueurs);
-    setNbJoueursCo(game.nbJoueursCo);
   }
 
   useEffect(() => {
@@ -36,12 +34,12 @@ function SalleAttente() {
       const socket = io("http://localhost:5000", { transports: ["websocket"] });
       setSocket(socket);
   
-      socket.on("update-players-co", (joueurs) => {
+      socket.on("update-players", (joueurs) => {
         setPlayers(joueurs);
+        let nbCo = joueurs.players.length;
         async function test(){
           const codePartie = window.location.search.substr(1);
-          setNbJoueursCo(nbJoueursCo); /*+ 1 je n'arrive pas a gerer le -1 a la deconnection*/;
-          const modifGame = {nbJoueurs : nbJ, code : code, host : host, nbJoueursCo : nbJoueursCo};
+          const modifGame = {nbJoueurs : nbJ, code : code, host : host, joueursCo : undefined, nbJoueursCo : nbCo};
           await fetch(`http://localhost:5000/updateGame/${codePartie}`, {
               method: "POST",
               headers: {
@@ -58,6 +56,7 @@ function SalleAttente() {
       });
       
       socket.emit("join-room", { roomId: code, username: getUser() }); 
+      // Gestionnaire d'événements pour "join-room"
 
       return () => {
         socket.disconnect();
@@ -67,6 +66,22 @@ function SalleAttente() {
   }, [code]);
 
   function startGame() {
+      async function MAJjoueursCo(){
+        const codePartie = window.location.search.substr(1);
+        const modifGame = {nbJoueurs : nbJ, code : code, host : host, joueursCo : tab, nbJoueursCo : null};
+        await fetch(`http://localhost:5000/updateGame/${codePartie}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(modifGame),
+        })
+        .catch(error => {
+            window.alert(error);
+            return;
+        });
+      }
+      MAJjoueursCo();
     socket.emit("start-game", { roomId: code }); // émettre l'événement "start-game" sur la socket
   }
 

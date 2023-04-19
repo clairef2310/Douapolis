@@ -43,6 +43,7 @@ gameRoutes.route("/game/add").post(function (req, response) {
     nbJoueurs: req.body.nbJoueurs,
     code: req.body.code,
     host: req.body.host,
+    joueursCo: req.body.joueursCo,
     nbJoueursCo: req.body.nbJoueursCo
  };
  db_connect.collection("game").insertOne(myobj, function (err, res) {
@@ -60,6 +61,7 @@ gameRoutes.route("/updateGame/:code").post(function (req, response) {
     nbJoueurs: req.body.nbJoueurs,
     code: req.body.code,
     host: req.body.host,
+    joueursCo: req.body.joueursCo,
     nbJoueursCo: req.body.nbJoueursCo
    },
  };
