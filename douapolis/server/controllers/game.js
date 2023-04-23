@@ -30,17 +30,9 @@ exports.startGame = (req, res, next) => {
                 .updateOne(
                     gameQuery,
                     { $set: {
-                        state: "started",
-                        owners: propertyOwner
-                    }}
-                );
-
-            db_connect
-                .collection("game")
-                .updateOne(
-                    gameQuery,
-                    { $set : {
-                        buildings: buildings
+                        owners: propertyOwner,
+                        buildings: buildings,
+                        mortgagedProperties: []
                     }}
                 );
         })
@@ -152,9 +144,16 @@ exports.build = async function build(req, res, next) {
         .toArray();
 
     if (game.owners[property.adress] !== player.pseudo) {
-        res.status(409).json(
-            { error: "Unable to built on this property: player is not the owner"}
-        );
+        res.status(400).json({
+            error: "Unable to built on this property: player is not the owner"
+        });
+        return;
+    }
+
+    if (game.mortgagedProperties.includes(property.adress)) {
+        res.status(400).json({
+            error: "Unable to build on this property: property is mortgaged"
+        });
         return;
     }
 
@@ -176,9 +175,50 @@ exports.build = async function build(req, res, next) {
     player.money -= property.buildingCost;
     game.buildings[property.adress] += 1;
 
-    db_connect
-    .collection("game")
-    .updateOne(gameQuery, { $set: game })
-    .then(() => res.status(200).json({ message: "House built" }));
+    try {
+        db_connect.collection("users").updateOne(playerQuery, { $set: player });
+        db_connect.collection("game").updateOne(gameQuery, { $set: game });
+    } catch (e) {
+        res.status(500).json({ error: "Unable to write changes to DB"});
+        return;
+    }
 
+    res.status(201).json({ message: "Succesfully built house"});
+}
+
+exports.mortgage = async function mortgage(req, res, next) {
+    let db_connect = dbo.getDb();
+
+    let gameQuery = {};
+    let propertyQuery = {};
+    let playerQuery = {};
+
+    try {
+        gameQuery = { code: req.body.gameCode };
+        propertyQuery = { adress: req.body.propertyAdress };
+    } catch (e) {
+        res.status(400).json(
+            { error: "Unable to mortgage property: not enough information passed"}
+        );
+        return;
+    }
+
+    let property = await db_connect.collection("properties").findOne(propertyQuery);
+    let game = await db_connect.collection("game").findOne(gameQuery);
+
+    playerQuery = { pseudo: game.owners[property.adress]};
+    let player = await db_connect.collection("users").findOne(playerQuery);
+
+    game.mortgagedProperties.push(property.adress);
+    player.money += (property.price/2);
+
+    try {
+        db_connect.collection("users").updateOne(playerQuery, { $set: player });
+        db_connect.collection("game").updateOne(gameQuery, { $set: game });
+    } catch (e) {
+        res.status(500).json({ error: "Unable to write changes to DB"});
+        return;
+    }
+
+    res.status(201).json({ message: "Succesfully mortgaged property"});
 }
