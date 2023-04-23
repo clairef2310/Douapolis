@@ -206,8 +206,22 @@ exports.mortgage = async function mortgage(req, res, next) {
     let property = await db_connect.collection("properties").findOne(propertyQuery);
     let game = await db_connect.collection("game").findOne(gameQuery);
 
+    if (game.owners[property.adress] === null) {
+        res.status(400).json({
+            error: "Unable to mortgage property: property isn't owned by a player"
+        });
+        return;
+    }
+
     playerQuery = { pseudo: game.owners[property.adress]};
     let player = await db_connect.collection("users").findOne(playerQuery);
+
+    if (game.buildings[property.adress] > 0) {
+        res.status(400).json({
+            error: "Unable to mortgage property: property has bulding(s)"
+        });
+        return;
+    }
 
     game.mortgagedProperties.push(property.adress);
     player.money += (property.price/2);
