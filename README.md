@@ -57,7 +57,8 @@ Ici, ils pourront **lancer les dés** et se **déplacer**.
 ## Ce qu'il manque
 
 Fin de partie, gestion du tour par tour en partie à l'aide des sockets.
-
+Salle d'attente : si l'hote quitte la partie ca la supprime de la db et ca ejecte les joueurs qui attendent
+Jeu : si quelqu'un quitte, la partie s'arrete.
 
 ## Le groupe CRIM
 - Claire Fernandes @p2005541
