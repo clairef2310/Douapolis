@@ -5,10 +5,10 @@ import {Button} from "react-bootstrap";
 export default function AjoutStats() {
 
     const [form, setForm] = useState({
-      name: "6",
-      cases: "",
-      achats: "",
-      argents: "",
+      name: getUser(),
+      cases: entierAleatoire(0,100).toString(),
+      achats: entierAleatoire(0,100).toString(),
+      argents: entierAleatoire(0,100).toString(),
     });
     const navigate = useNavigate();
 
@@ -22,29 +22,88 @@ export default function AjoutStats() {
     //fonction de modif des stats
     async function modifStats(event){
         event.preventDefault();
-        const modif = { ...form };
-        console.log(form.name); 
-        console.log(modif);
-        await fetch(`http://localhost:5000/updateStats/${form.name}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(modif),
-        })
-        .catch(error => {
-            window.alert(error);
-            return;
-        });
-        setForm({ name: "6",cases: "",achats: "",argents: "", });
+        const response = await fetch(`http://localhost:5000/stats/`);
+    
+        if (!response.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+    
+        const records = await response.json();
+
+        console.log((Object.values(records[0])).length);
+        
+        const newPerson = { ...form };
+   
+      let UserAlreadyRegister = false;
+      let UserModified;
+     for (let i = 0; i < records.length; i++) {
+       if(form.name === records[i].name){
+         UserAlreadyRegister = true;
+         UserModified = records[i];
+         break;
+       }
+     }
+     //console.log(UserModified);
+
+     if(!UserAlreadyRegister){
+      await fetch("http://localhost:5000/stats/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+      })
+      .catch(error => {
+        window.alert(error);
+        return;
+      });
+    
+      setForm({ name: "", cases: "", achats: "", argents: "" });
+      retourProfil();
+     } else {
+      const editedPerson = {
+        name: form.name,
+        cases: (parseInt(form.cases) + parseInt(UserModified.cases)).toString(),
+        achats: (parseInt(form.achats) + parseInt(UserModified.achats)).toString(),
+        argents: (parseInt(form.argents) + parseInt(UserModified.argents)).toString(),
+      };
+      //console.log(editedPerson);
+
+      await fetch(`http://localhost:5000/updateStats/${UserModified.name}`, {
+        method: "POST",
+        body: JSON.stringify(editedPerson),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+     }
+     retourProfil();
     };
     function retourProfil(){
         navigate('/Profil');
     }
+
+    function entierAleatoire(min, max)
+    {
+     return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
     // This following section will display the form that takes the input from the user.
     return (
       <div>
         <h3>Create New Record</h3>
+        <div className="form-group">
+            <label htmlFor="name">name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={form.name}
+              onChange={(e) => updateForm({ name: e.target.value })}
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="cases">cases</label>
             <input

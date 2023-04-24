@@ -3,6 +3,7 @@ import {useState, React, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
 import { logout, getUser} from "./testAuth/AuthApi";
+import { Link } from "react-router-dom";
 
 //page de profil d'un utilisateur
 export default function Profil() {
@@ -16,6 +17,19 @@ export default function Profil() {
         pseudo: "",
         mdp: "",
     });
+
+    const [InfoJoueur, setInf] = useState({
+        name: "",
+        cases: "",
+        achats: "",
+        argents: "",
+    })
+
+    const [formAmis, setFormAmis] = useState({
+        name: "",
+        listAmis: "",
+        demandeAmis : "",
+      });
      
     const params = useParams();
     const navigate = useNavigate();
@@ -40,6 +54,55 @@ export default function Profil() {
           setForm(users);
         }
         fetchData();
+
+        let records;
+
+        async function getRecords() {
+            const response = await fetch(`http://localhost:5000/stats/`);
+        
+            if (!response.ok) {
+              const message = `An error occurred: ${response.statusText}`;
+              window.alert(message);
+              return;
+            }
+        
+            records = await response.json();
+
+            let UserAlreadyRegister = false;
+            let UserModified;
+            for (let i = 0; i < records.length; i++) {
+                if(getUser() == records[i].name){
+                    UserAlreadyRegister = true;
+                    UserModified = records[i];
+                    break;
+                }
+            }
+
+            setInf(UserModified);
+          }
+        
+          getRecords();
+
+          async function getRecordsAmi() {
+            const response = await fetch(`http://localhost:5000/amis/`);
+
+            if(!response.ok){
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+
+            records = await response.json();
+
+            for(let i = 0; i < records.length; i++){
+                if(getUser() === records[i].name){
+                    setFormAmis(records[i])
+                }
+            }
+            
+        }
+
+        getRecordsAmi();
       
         return;
       }, [params.pseudo, navigate]);
@@ -50,6 +113,49 @@ export default function Profil() {
 
     function param(){
         navigate('/AjoutStats');
+    }
+
+    function AffichageStats(){
+        //{InfoJoueur.cases} {InfoJoueur.achats} {InfoJoueur.argents}
+        let cases = "0";
+        let achats = "0";
+        let argents = "0";
+        if(typeof InfoJoueur != 'undefined'){
+            cases = InfoJoueur.cases;
+            achats = InfoJoueur.achats;
+            argents = InfoJoueur.argents;
+        }
+        return (
+            <><ListGroup.Item as="li">
+                Cases parcourus : {cases}
+            </ListGroup.Item><ListGroup.Item as="li">
+                Nombre d'achats : {achats}
+            </ListGroup.Item><ListGroup.Item as="li">
+                Argents total accumulés : {argents}
+            </ListGroup.Item></>
+        );
+      }
+
+    function AfficherAmis(){
+        let res = (
+            <><ListGroup.Item as="li">
+                Aucun Amis
+            </ListGroup.Item></>
+        );
+
+        if(formAmis.listAmis != "") {
+            return (
+                <>
+                {formAmis.listAmis.map((index) => (
+                    <ListGroup.Item as="li" key={index}>
+                        {index}
+                    </ListGroup.Item>
+                ))
+                }
+                </>
+              );
+        }
+        return res; 
     }
 
     //formulaire et titre afficher sur la page 
@@ -63,17 +169,9 @@ export default function Profil() {
                     <div>
                         <ListGroup as="ul">
                             <ListGroup.Item as="li" active className="center">
-                                Statistique
+                                Statistiques
                             </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                               vous étes toujours dernier : nul
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                0 livre achetées
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                ruiné !
-                            </ListGroup.Item>
+                            {AffichageStats()}
                         </ListGroup>
                     </div>
                     <div>
@@ -82,14 +180,9 @@ export default function Profil() {
                             <ListGroup.Item as="li" active className="center">
                                 Amis
                             </ListGroup.Item>
+                            {AfficherAmis()}
                             <ListGroup.Item as="li">
-                               Iona
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Mathis
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li">
-                                Romain
+                                <Link className="btn btn-link" to={`/GestionAmis`}>Gestion des amis</Link>
                             </ListGroup.Item>
                         </ListGroup>
                     </div>
