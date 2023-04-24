@@ -9,6 +9,7 @@ import NewJeu from './NewJeu';
 import SalleAttente from './SalleAttente';
 import { UserProvider } from './testAuth/userAuth';
 import AjoutStats from './AjoutStats';
+import GestionAmis from './GestionAmis';
 
 function App() {
     //routes qui vont permettre de naviguer dans l'application
@@ -25,7 +26,8 @@ function App() {
                         <Route  path='/NewCompte' element={<NewCompte/>} />    
                         <Route  path='/NewJeu' element={<NewJeu/>} />                    
                         <Route  path='/SalleAttente' element={<SalleAttente/>} />
-                        <Route  path='/AjoutStats' element={<AjoutStats/>} />                 
+                        <Route  path='/AjoutStats' element={<AjoutStats/>} />   
+                        <Route  path='/GestionAmis' element={<GestionAmis/>} />              
                     </Routes>
                 </UserProvider>
             </Router>

@@ -3,6 +3,7 @@ import {useState, React, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
 import { logout, getUser} from "./testAuth/AuthApi";
+import { Link } from "react-router-dom";
 
 //page de profil d'un utilisateur
 export default function Profil() {
@@ -23,6 +24,12 @@ export default function Profil() {
         achats: "",
         argents: "",
     })
+
+    const [formAmis, setFormAmis] = useState({
+        name: "",
+        listAmis: "",
+        demandeAmis : "",
+      });
      
     const params = useParams();
     const navigate = useNavigate();
@@ -75,6 +82,27 @@ export default function Profil() {
           }
         
           getRecords();
+
+          async function getRecordsAmi() {
+            const response = await fetch(`http://localhost:5000/amis/`);
+
+            if(!response.ok){
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+
+            records = await response.json();
+
+            for(let i = 0; i < records.length; i++){
+                if(getUser() === records[i].name){
+                    setFormAmis(records[i])
+                }
+            }
+            
+        }
+
+        getRecordsAmi();
       
         return;
       }, [params.pseudo, navigate]);
@@ -109,15 +137,25 @@ export default function Profil() {
       }
 
     function AfficherAmis(){
-        return (
+        let res = (
             <><ListGroup.Item as="li">
-                Iona
-            </ListGroup.Item><ListGroup.Item as="li">
-                Mathis
-            </ListGroup.Item><ListGroup.Item as="li">
-                Romain
+                Aucun Amis
             </ListGroup.Item></>
         );
+
+        if(formAmis.listAmis != "") {
+            return (
+                <>
+                {formAmis.listAmis.map((index) => (
+                    <ListGroup.Item as="li" key={index}>
+                        {index}
+                    </ListGroup.Item>
+                ))
+                }
+                </>
+              );
+        }
+        return res; 
     }
 
     //formulaire et titre afficher sur la page 
@@ -143,6 +181,9 @@ export default function Profil() {
                                 Amis
                             </ListGroup.Item>
                             {AfficherAmis()}
+                            <ListGroup.Item as="li">
+                                <Link className="btn btn-link" to={`/GestionAmis`}>Gestion des amis</Link>
+                            </ListGroup.Item>
                         </ListGroup>
                     </div>
                     <div>
