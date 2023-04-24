@@ -64,9 +64,50 @@ exports.startGame = (req, res, next) => {
 }
 
 // renvoyer le proprio et l'argent
-exports.playerAt = (req, res, next) => {
-    let playerName = req.body.player;
-    let propName = req.body.property;
+exports.playerAt = async function playerAt(req, res, next) {
+    let db_connect = dbo.getDb();
+
+    let playerQuery = {};
+    let gameQuery = {};
+    let tileName = "";
+
+    try {
+        playerQuery = { pseudo: req.body.player };
+        gameQuery = { code: req.body.gameCode };
+        tileName = req.body.tile;
+    } catch (e) {
+        res.status(400).json({
+            error: "Not enough arguments passed"
+        });
+        return;
+    }
+
+    let player = await db_connect.collection("users").findOne(playerQuery);
+    let game = await db_connect.collection("game").findOne(gameQuery);
+
+    if (game.owners.hasOwnProperty(tileName)) {
+        let property = await db_connect.collection("properties").findOne({ adress: tileName });
+        if (game.owners[property.adress] != null) {
+            let landlord = await db_connect.collection("users").findOne({
+                pseudo: game.owners[property.adress]
+            });
+
+            landlord.money += property.baseRent;
+            player.money -= property.baseRent;
+
+            db_connect.collection("users").updateOne(
+                { pseudo: landlord.pseudo },
+                { $set: landlord }
+            );
+
+            db_connect.collection("users").updateOne(
+                { pseudo: player.pseudo },
+                { $set: player }
+            );
+
+            res.status(200).json(player, landlord);
+        }
+    }
 }
 
 exports.buyProperty = (req, res, next) => {
