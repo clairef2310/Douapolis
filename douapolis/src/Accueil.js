@@ -5,6 +5,8 @@ import Navigation from "./Navigation";
 import './index.css' 
 import { hasAuthenticated } from "./testAuth/AuthApi";
 import { UserContext } from "./testAuth/userAuth";
+import { getUser,login } from "./testAuth/AuthApi";
+
 //page d'accueil du jeu
 
 function Accueil() {
@@ -25,7 +27,35 @@ function Accueil() {
             if (game) {
                 var val = window.confirm("Etes-vous sur de vouloir rejoindre cette partie ?");
                 if( val === true ) {
-                    navigate(`/SalleAttente?${codePartie}`, {replace : true});
+
+                    if(game.nbJoueursCo===game.nbJoueurs){
+                        alert("Cette partie est pleine");
+                    }
+                    if(game.nbJoueurs.Co===null){
+                        alert("Cette partie a déjà commencé");
+                    }
+                    else{
+                        if(getUser()===null){
+                            const nomGuest = generateGuest();
+                            const newUser = { pseudo : nomGuest};
+                            await fetch("http://localhost:5000/users/add", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(newUser),
+                            })
+                            .catch(error => {
+                                window.alert(error);
+                                return;
+                            });
+
+                            login(nomGuest);
+                            navigate(`/SalleAttente?${codePartie}`, {replace : true});
+
+                        }
+                        else navigate(`/SalleAttente?${codePartie}`, {replace : true});
+                    }
                 }
             }
             else{
@@ -44,6 +74,29 @@ function Accueil() {
         fetchData();
         return;
       }, [setUserState]);
+    
+    function generateGuest(){
+        const char = '0123456789'
+        let guest = 'Guest';
+        for(let i=0;i<5;i++){
+            const randChar = Math.floor(Math.random()*char.length);
+            guest += char[randChar];
+        }
+        async function verif(){
+            const response = await fetch(`http://localhost:5000/users/${guest}`);
+            if (!response.ok) {
+                const message = `An error has occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const users = await response.json();
+            if (users) {
+                generateGuest();
+            }
+        }
+        verif();
+        return guest;
+    }
     //formulaire et titre afficher sur la page 
     return(
         <div className="body">

@@ -52,6 +52,15 @@
   border-radius: 25px;
   transform: translate(-50%,-50%);
 }
+
+.Attente{
+  position:relative; 
+  width: 50em; 
+  height: 25em; 
+  left: 50%;
+  margin-top: 13em; 
+  transform: translate(-50%,-50%);
+}
 /* Quand je change la couleur de mon background,j'ai un soucis car la couleur 
 ne prend pas tout l'écran, il faudrait mettre un footer qui se colle à la derniere div
 .Pied{
@@ -125,6 +134,23 @@ ne prend pas tout l'écran, il faudrait mettre un footer qui se colle à la dern
   left: 50%; 
   top: 80%; 
   transform: translate(-50%,-50%); 
+}
+
+.nbaleatoir{
+  position: absolute;
+  left: 60%;
+  top: 20%;
+}
+
+.plateau{
+  position: relative;
+  left : 25%;
+}
+
+.banque{
+  position: absolute;
+  left: -30%;
+  top: 20%;
 }
 
 p{
