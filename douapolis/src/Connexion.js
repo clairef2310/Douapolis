@@ -29,6 +29,7 @@ function Connexion() {
             //Si les mdp correspondent
             if(pass===users.mdp) {
                 login(pseudo);
+                sessionStorage.setItem('estConnecte',true)
                 navigate(`/Profil/`);
             } 
             //sinon

@@ -83,6 +83,7 @@ function SalleAttente() {
       }
       MAJjoueursCo();
     socket.emit("start-game", { roomId: code }); // émettre l'événement "start-game" sur la socket
+    sessionStorage.setItem('estAutorise',true)
   }
 
   if(socket!==null){
