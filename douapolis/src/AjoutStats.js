@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import {Button} from "react-bootstrap";
+import { getUser } from "./testAuth/AuthApi";
 
 export default function AjoutStats() {
 

@@ -71,7 +71,8 @@ export default function Profil() {
             let UserAlreadyRegister = false;
             let UserModified;
             for (let i = 0; i < records.length; i++) {
-                if(getUser() == records[i].name){
+                if(getUser() === records[i].name){
+                    // eslint-disable-next-line
                     UserAlreadyRegister = true;
                     UserModified = records[i];
                     break;
@@ -112,7 +113,50 @@ export default function Profil() {
     }
 
     function param(){
-        navigate('/AjoutStats');
+        navigate('/Parametres');
+    }
+
+    function AffichageStats(){
+        //{InfoJoueur.cases} {InfoJoueur.achats} {InfoJoueur.argents}
+        let cases = "0";
+        let achats = "0";
+        let argents = "0";
+        if(typeof InfoJoueur != 'undefined'){
+            cases = InfoJoueur.cases;
+            achats = InfoJoueur.achats;
+            argents = InfoJoueur.argents;
+        }
+        return (
+            <><ListGroup.Item as="li">
+                Cases parcourus : {cases}
+            </ListGroup.Item><ListGroup.Item as="li">
+                Nombre d'achats : {achats}
+            </ListGroup.Item><ListGroup.Item as="li">
+                Argents total accumulés : {argents}
+            </ListGroup.Item></>
+        );
+      }
+
+    function AfficherAmis(){
+        let res = (
+            <><ListGroup.Item as="li">
+                Aucun Amis
+            </ListGroup.Item></>
+        );
+
+        if(formAmis.listAmis !== "") {
+            return (
+                <>
+                {formAmis.listAmis.map((index) => (
+                    <ListGroup.Item as="li" key={index}>
+                        {index}
+                    </ListGroup.Item>
+                ))
+                }
+                </>
+              );
+        }
+        return res; 
     }
 
     function AffichageStats(){
@@ -187,12 +231,11 @@ export default function Profil() {
                         </ListGroup>
                     </div>
                     <div>
-                        <br/>
-                        <Button type="submit" onClick={deconnexion} className='button'> Déconnexion </Button>
-                        <br/>
-                        <Button type="submit" onClick={stats} className='button'> Stats </Button>
-                        <br/>
-                        <Button type="submit" onClick={param} className='button'> Param </Button>
+                        <div className="button-line">
+                            <Button type="submit" variant="danger" onClick={deconnexion} className='button'> Déconnexion </Button>
+                            <Button type="submit" onClick={stats} className='button'> Statistiques </Button>
+                            <Button type="submit" onClick={param} className='button'> Parametres </Button>
+                        </div>
                     </div>
             </Container>
         </div>

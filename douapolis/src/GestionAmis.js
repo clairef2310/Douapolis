@@ -3,10 +3,9 @@ import {useState, React, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
 import Navigation from "./Navigation";
 import { logout, getUser} from "./testAuth/AuthApi";
-import { Link } from "react-router-dom";
 
 export default function GestionAmis() {
-
+    // eslint-disable-next-line 
     async function deconnexion(){
         logout();
         navigate('/');
@@ -26,7 +25,7 @@ export default function GestionAmis() {
         listAmis: "",
         demandeAmis :"",
       });
-
+        // eslint-disable-next-line 
       function updateFormAmis(value) {
         return setFormAmis((prev) => {
           return { ...prev, ...value };
@@ -97,7 +96,7 @@ export default function GestionAmis() {
             </ListGroup.Item></>
         );
 
-        if(formAmis.listAmis != "") {
+        if(formAmis.listAmis !== "") {
             return (
                 <>
                 {formAmis.listAmis.map((index) => (
@@ -118,7 +117,7 @@ export default function GestionAmis() {
                 Aucune demande d'amis
             </ListGroup.Item></>
         )
-        if(formAmis.demandeAmis != "") {
+        if(formAmis.demandeAmis !== "") {
             return (
                 <>
                 {formAmis.demandeAmis.map((index) => (
@@ -136,7 +135,7 @@ export default function GestionAmis() {
     async function DemandeAjout(event){
         console.log(formDemande.name);
         for(const ami in formAmis.listAmis){
-            if(formAmis.listAmis[ami] == formDemande.name){
+            if(formAmis.listAmis[ami] === formDemande.name){
                 window.alert("Déjà ami avec cette personne");
                 return;
             } 
@@ -160,7 +159,7 @@ export default function GestionAmis() {
             }
         }
 
-        if(user2 == undefined) {
+        if(user2 === undefined) {
             window.alert("utilisateur inexistant");
             return;
         }
@@ -168,7 +167,7 @@ export default function GestionAmis() {
         console.log(user2);
 
         for(const ami in formAmis.demandeAmis){
-            if(formAmis.demandeAmis[ami] == formDemande.name){
+            if(formAmis.demandeAmis[ami] === formDemande.name){
                 const edited1 = {
                     name: user2.name,
                     listAmis: user2.listAmis,
@@ -182,7 +181,7 @@ export default function GestionAmis() {
                 }
                 edited2.listAmis.push(user2.name);
                 for(let i=0; i<edited2.demandeAmis.length;i++){
-                    if(edited2.demandeAmis[i]==user2.name){
+                    if(edited2.demandeAmis[i]===user2.name){
                         delete edited2.demandeAmis[i];
                     }
                 }
@@ -236,13 +235,13 @@ export default function GestionAmis() {
                     </div>
                     <br></br>
                     <div className="form-group">
-                        <button
+                        <Button
                             onClick={DemandeAjout}
                             type="submit"
                             id = "nomDem"
                             value="Send stats"
                             className="btn btn-primary"
-                        >Envoyer Demande</button>
+                        >Envoyer Demande</Button>
                     </div>
             </ListGroup.Item></>
         );

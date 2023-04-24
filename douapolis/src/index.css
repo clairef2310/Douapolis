@@ -156,3 +156,10 @@ ne prend pas tout l'écran, il faudrait mettre un footer qui se colle à la dern
 p{
   color: #000000;
 }
+
+.button-line {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
