@@ -24,11 +24,7 @@ Ce projet s'intitule **Douapolis**, c'est un jeu de société similaire au **Mon
 
 1. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
 
-> Une fois les _node_modules_ installés, toujours en se trouvant dans les bons dossiers pour le server et le client.
-
-1. Il faut ensuite lancer le serveur avec `nodemon server.js` ou avec `node server.js`
-
-4. Il faut ensuite lancer le serveur avec `npm start`
+1. Une fois les _node_modules_ installés, se placer dans _./douapolis_ et lancez la commande `npm run launch`
 
 ## Navigation dans l'App
 
