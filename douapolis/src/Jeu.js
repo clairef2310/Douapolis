@@ -1,11 +1,13 @@
 import {Button, Container} from "react-bootstrap";
-import {useState, React} from 'react';
+import {useState, React,useEffect} from 'react';
 import Navigation from "./Navigation";
 import {ReactComponent as ReactLogo} from './plateau/plateau_monopoly.svg';
 import trex from './images/trex.png';
 import bateau from './images/bateau.png'
 import chien from './images/chien.png'
 import voiture from './images/voiture.png'
+import { io } from "socket.io-client";
+import { getUser } from "./testAuth/AuthApi";
 
 //page ou l'on joue au monopoly
 function Jeu() {
@@ -35,6 +37,49 @@ function Jeu() {
     const [indchien, setIndchien] = useState(0)
     // eslint-disable-next-line
     const [solde, setSolde] = useState(1680);
+
+    const [code, setCode] = useState("");
+    const [host, setHost] = useState("");
+    const [tab, setPlayers] = useState({players: []});
+    const [nbJ, setNbJ] = useState(null);
+    const [nbJoueursCo, setNbJoueursCo] = useState(null);
+    const [socket, setSocket] = useState(null);
+
+    async function fetchPartie() {
+        const codePartie = window.location.search.substr(1);
+        const response = await fetch(`http://localhost:5000/game/${codePartie}`);
+        if (!response.ok) {
+          const message = `An error has occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+        const game = await response.json();
+        setCode(game.code);
+        setHost(game.host);
+        setNbJ(game.nbJoueurs);
+        setNbJoueursCo(game.nbJoueursCo);
+        setPlayers(game.joueursCo);
+    }
+
+  useEffect(() => {
+    fetchPartie();
+    if (code) {
+      const socket = io("http://localhost:5000", { transports: ["websocket"] });
+      setSocket(socket);
+  
+      socket.on("update-players", (joueurs) => {
+        setPlayers(joueurs);
+      });
+      
+      socket.emit("join-room", { roomId: code, username: getUser() }); 
+      // Gestionnaire d'événements pour "join-room"
+
+      return () => {
+        socket.disconnect();
+      };
+    };
+    // eslint-disable-next-line
+  }, [code]);
 
     //coordonnée case départ 
     //position x : 640

@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
     });
 
     // Send the updated list of players to all players in the room
-    io.in(roomId).emit('update-players-co', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
+    io.in(roomId).emit('update-players', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
 
     io.in(roomId).emit('nb-players-co', { nb: rooms[roomId].players.length});
   });
@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
   // Disconnect event
   socket.on('disconnect', () => {
     console.log('a user disconnected');
-
+  
     // Remove the player from the room and memory
     const player = players[socket.id];
     if (player) {
@@ -81,11 +81,11 @@ io.on('connection', (socket) => {
       rooms[roomId].players = rooms[roomId].players.filter((p) => p !== socket.id);
       delete players[socket.id];
       socket.broadcast.to(roomId).emit('player-left', { username: player.username });
-
+  
       // Send the updated list of players to all players in the room
       io.in(roomId).emit('update-players', { players: rooms[roomId].players.map((playerId) => players[playerId].username) });
     }
-  });
+  });  
 
 });
 
