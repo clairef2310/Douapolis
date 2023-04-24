@@ -97,7 +97,7 @@ function Jeu() {
         let joueur = ['T-rex','Bateau','Chien','Voiture']
 
         if(de1 !== de2){
-            if(count === 3){
+            if(count === nbJ -1){
                 setVariant(tab[count]);
                 setPlayer(joueur[count]);
                 setcount(0);
