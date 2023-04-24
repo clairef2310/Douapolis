@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# DOUAPOLI$
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) Par le groupe **CRIM**
 
-## Available Scripts
+Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_
 
-In the project directory, you can run:
+Nous avons utilisé :
 
-### `npm start`
+- MongoDB (cloud)
+- React
+- Socket.io
+- Local/Session Storage
+- Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Description
 
-### `npm test`
+Ce projet s'intitule **Douapolis**, c'est un jeu de société similaire au **Monopoly** créé en utilisant **React**. Le but du jeu est d'acheter et de vendre des propriétés tout en collectant des loyers et en évitant les impôts et les dettes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Préparation/Lancement de l'App
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Pour pouvoir lancer le client, il faut être dans le répertoire _./douapolis_, vous devez executer `npm install` afin de récuperer node_modules.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Une fois les _node_modules_ installés, toujours en se trouvant dans les bons dossiers pour le server et le client.
 
-### `npm run eject`
+1. Il faut ensuite lancer le serveur avec `nodemon server.js` ou avec `node server.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Il faut ensuite lancer le serveur avec `npm start`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Navigation dans l'App
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+On arrive dans la page d'**Accueil**, déconnecté. On peut choisir soit de se connecter soit de rejoindre une partie en tant qu'invité.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Un utilisateur connecté a accès a son **profil**, peut **changer son pseudo et son mot de passe** si besoin, peut **ajouter des amis** et également **consulter ses statistiques** de partie.
 
-## Learn More
+Lorsque l'on rejoint une partie, on arrive dans une salle d'attente gérée par **socket.io**, l'hôte peut **lancer la partie** si il y a assez de joueurs.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Une fois une partie lancée les joueurs connectés dans la socket sont **redirigés** vers la page de **jeu** avec un **plateau en svg** et les pions.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Ici, ils pourront **lancer les dés** et se **déplacer**.
 
-### Code Splitting
+## Les differents dossiers
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- maquette html : C'est de là que l'on est partit pour la base du site ;
+- douapolis : Le dossier de l'Application React contenant :
+    - server : Le serveur final qui gère la connection a la base de donnée et les sockets ;
+    - serverlocal : le premier serveur que l'on a utilisé qui été géré en Local ;
+    - src : qui contient tout les fichiers et les images de l'Application tels que :
+        - Le plateau ;
+        - L'authentification via localStorage
+        - Les pages (Accueil,Profil,Connexion...)
+        - Le CSS.
 
-### Analyzing the Bundle Size
+## Ce qu'il manque
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Fin de partie, gestion du tour par tour en partie à l'aide des sockets.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Le groupe CRIM
+- Claire Fernandes @p2005541
+- Romain Dieu--Guillot @p2207518
+- Iona Sirach @p1810630
+- Mathys Sambet @p2207653
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
