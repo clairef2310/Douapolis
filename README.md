@@ -10,6 +10,7 @@ Nous avons utilisé :
 - React
 - Socket.io
 - Local/Session Storage
+- Bootstrap
 
 
 ## Description
@@ -41,7 +42,21 @@ Une fois une partie lancée les joueurs connectés dans la socket sont **redirig
 
 Ici, ils pourront **lancer les dés** et se **déplacer**.
 
+## Les differents dossiers
+
+- maquette html : C'est de là que l'on est partit pour la base du site ;
+- douapolis : Le dossier de l'Application React contenant :
+    - server : Le serveur final qui gère la connection a la base de donnée et les sockets ;
+    - serverlocal : le premier serveur que l'on a utilisé qui été géré en Local ;
+    - src : qui contient tout les fichiers et les images de l'Application tels que :
+        - Le plateau ;
+        - L'authentification via localStorage
+        - Les pages (Accueil,Profil,Connexion...)
+        - Le CSS.
+
 ## Ce qu'il manque
+
+Fin de partie, gestion du tour par tour en partie à l'aide des sockets.
 
 
 ## Le groupe CRIM
