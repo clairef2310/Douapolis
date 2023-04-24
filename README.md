@@ -1,10 +1,12 @@
 # DOUAPOLI$
 
-Projet réalisé dans le cadre de **LIFPROJET** par le groupe **CRIM**
+Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) Par le groupe **CRIM**
+
+Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_
 
 Nous avons utilisé :
 
-- MongoDB
+- MongoDB (cloud)
 - React
 - Socket.io
 - Local/Session Storage
@@ -42,8 +44,9 @@ Ici, ils pourront **lancer les dés** et se **déplacer**.
 ## Ce qu'il manque
 
 
-## Le groupe
+## Le groupe CRIM
 - Claire Fernandes @p2005541
-- Mathys Sambet @p2207653
 - Romain Dieu--Guillot @p2207518
 - Iona Sirach @p1810630
+- Mathys Sambet @p2207653
+
