@@ -22,6 +22,8 @@ const dbo = require("./db/conn");
 // Store rooms and players in memory
 const rooms = {};
 const players = {};
+const diceValue = null;
+const newPosition = '';
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -35,13 +37,13 @@ io.on('connection', (socket) => {
       username,
       roomId,
     };
-    console.log(players);
     // Create the room if it doesn't exist
     if (!rooms[roomId]) {
       rooms[roomId] = {
         players: [],
       };
     }
+    console.log(players);
 
     // Check if the player has already joined the room
     const alreadyJoined = rooms[roomId].players.some(playerId => playerId === socket.id);
@@ -79,6 +81,7 @@ io.on('connection', (socket) => {
   
     // Remove the player from the room and memory
     const player = players[socket.id];
+    
     if (player) {
       const roomId = player.roomId;
       rooms[roomId].players = rooms[roomId].players.filter((p) => p !== socket.id);
