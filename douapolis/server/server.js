@@ -9,9 +9,11 @@ require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
+
 app.use(require("./routes/users"));
 app.use(require("./routes/game"));
 app.use(require("./routes/stats"));
+app.use(require("./routes/play"));
 
 // get driver connection
 const dbo = require("./db/conn");
@@ -98,4 +100,3 @@ dbo.connectToServer(function (err) {
     });
   }
 });
-
