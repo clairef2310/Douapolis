@@ -52,8 +52,12 @@ Ici, ils pourront **lancer les dés** et se **déplacer**.
 
 ## Ce qu'il manque
 
-Fin de partie, gestion du tour par tour en partie à l'aide des sockets.
-
+Mouvements des pions qui fonctionnent en décalé, gestion des 3 doubles d'affilé pas terminées;
+gestion du tour par tour en partie à l'aide des sockets pas réussi/terminé;
+Par conséquent : pas de fin de partie;
+Gestion de la sécurité du site (bloquer l'accès à certaines pages);
+Cloture de la salle d'attente si l'hôte quitte (ou changement d'hôte);
+Cloture de la partie en cours si quelqu'un quitte.
 
 ## Le groupe CRIM
 - Claire Fernandes @p2005541
