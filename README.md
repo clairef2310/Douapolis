@@ -2,7 +2,7 @@
 
 Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) Par le groupe **CRIM**
 
-Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_
+Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_, encadré par **Rémy Cazabet**.
 
 Nous avons utilisé :
 
@@ -22,19 +22,15 @@ Ce projet s'intitule **Douapolis**, c'est un jeu de société similaire au **Mon
 
 ## Préparation/Lancement de l'App
 
-/!\ Le projet ne peux pas se lancer sur les ordinateurs de l'université car ils n'ont pas node js d'installer.
+/!\ Le projet ne peut pas se lancer sur les ordinateurs de l'université car ils n'ont pas node js d'installé.
 
 1. Installer Nodejs sur l'ordinateur
 
-2. Pour pouvoir lancer le client, il faut être dans le répertoire _./douapolis_, vous devez executer `npm install` afin de récuperer node_modules.
+1. Pour pouvoir lancer le client, il faut être dans le répertoire _./douapolis_, vous devez executer `npm install` afin de récuperer node_modules.
 
-3. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
+1. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
 
-> Une fois les _node_modules_ installés, toujours en se trouvant dans les bons dossiers pour le server et le client.
-
-4. Il faut ensuite lancer le serveur avec `nodemon server.js` ou avec `node server.js`
-
-5. Il faut ensuite lancer le serveur avec `npm start`
+1. Une fois les _node_modules_ installés, se placer dans _./douapolis_ et lancez la commande `npm run launch`
 
 ## Navigation dans l'App
 
@@ -62,9 +58,12 @@ Ici, ils pourront **lancer les dés** et se **déplacer**.
 
 ## Ce qu'il manque
 
-Fin de partie, gestion du tour par tour en partie à l'aide des sockets.
-Salle d'attente : si l'hote quitte la partie ca la supprime de la db et ca ejecte les joueurs qui attendent
-Jeu : si quelqu'un quitte, la partie s'arrete.
+- Mouvements des pions qui fonctionnent en décalé, gestion des 3 doubles d'affilé pas terminées;
+- Gestion du tour par tour en partie à l'aide des sockets pas réussi/terminé;
+- Par conséquent : pas de fin de partie;
+- Gestion de la sécurité du site (bloquer l'accès à certaines pages);
+- Cloture de la salle d'attente si l'hôte quitte (ou changement d'hôte);
+- Cloture de la partie en cours si quelqu'un quitte.
 
 ## Le groupe CRIM
 - Claire Fernandes @p2005541
