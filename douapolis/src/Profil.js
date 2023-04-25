@@ -159,49 +159,6 @@ export default function Profil() {
         return res; 
     }
 
-    function AffichageStats(){
-        //{InfoJoueur.cases} {InfoJoueur.achats} {InfoJoueur.argents}
-        let cases = "0";
-        let achats = "0";
-        let argents = "0";
-        if(typeof InfoJoueur != 'undefined'){
-            cases = InfoJoueur.cases;
-            achats = InfoJoueur.achats;
-            argents = InfoJoueur.argents;
-        }
-        return (
-            <><ListGroup.Item as="li">
-                Cases parcourus : {cases}
-            </ListGroup.Item><ListGroup.Item as="li">
-                Nombre d'achats : {achats}
-            </ListGroup.Item><ListGroup.Item as="li">
-                Argents total accumulés : {argents}
-            </ListGroup.Item></>
-        );
-      }
-
-    function AfficherAmis(){
-        let res = (
-            <><ListGroup.Item as="li">
-                Aucun Amis
-            </ListGroup.Item></>
-        );
-
-        if(formAmis.listAmis != "") {
-            return (
-                <>
-                {formAmis.listAmis.map((index) => (
-                    <ListGroup.Item as="li" key={index}>
-                        {index}
-                    </ListGroup.Item>
-                ))
-                }
-                </>
-              );
-        }
-        return res; 
-    }
-
     //formulaire et titre afficher sur la page 
     return(
         <div className="body">

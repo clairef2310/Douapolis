@@ -31,6 +31,9 @@ function NewPartie() {
     async function creationPartie(event){
         if(form.nbJoueurs !== ''){
             event.preventDefault();
+            await fetch(`http://localhost:5000/gameDel/${getUser()}`, {
+                method: 'DELETE',
+            });
             const codePartie = generateCode();
             form.code = codePartie;
             form.host = getUser();
@@ -99,7 +102,7 @@ function NewPartie() {
             const game = await response.json();
             if (game) {
                 generateCode();
-            }
+            }              
         }
         verif();
         return code;

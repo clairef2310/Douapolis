@@ -68,8 +68,8 @@ function Jeu() {
   useEffect(() => {
     fetchPartie();
     if (code) {
-      const sock = io("http://localhost:5000", { transports: ["websocket"] });
-      setSocket(sock);
+      const socket = io("http://localhost:5000", { transports: ["websocket"] });
+      setSocket(socket);
   
       socket.on("update-players", (joueurs) => {
         setPlayers(joueurs);

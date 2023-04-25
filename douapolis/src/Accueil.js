@@ -31,7 +31,7 @@ function Accueil() {
                     if(game.nbJoueursCo===game.nbJoueurs){
                         alert("Cette partie est pleine");
                     }
-                    if(game.nbJoueurs.Co===null){
+                    if(game.nbJoueurs.Co===(null || undefined)){
                         alert("Cette partie a déjà commencé");
                     }
                     else{

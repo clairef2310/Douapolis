@@ -79,9 +79,9 @@ gameRoutes.route("/updateGame/:code").post(function (req, response) {
 });
 
 // This section will help you delete a game
-gameRoutes.route("/:id").delete((req, response) => {
+gameRoutes.route("gameDel/:host").delete((req, response) => {
     let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId(req.params.id) };
+    let myquery = { host: req.params.host };
     db_connect.collection("game").deleteOne(myquery, function (err, obj) {
         if (err) throw err;
         console.log("1 document deleted");
