@@ -8,23 +8,30 @@ exports.startGame = (req, res, next) => {
     let gameObject = {};
     let players = [];
 
-    // Initialisation du dictionnaire de propriétaire des différentes propriétés
+    // Initialisation des dictionnaires représentant les caractéristiques des
+    // propriétés : propriétaire, nombre de maisons
     db_connect
         .collection("properties")
         .find()
         .toArray()
         .then((properties) => {
+
+            // Création d'un dictionnaire avec toutes les propriétés en clé
+            // pour le stockage du nom des propriétaires
             let propertyOwner = {};
             properties.forEach(prop => {
                 propertyOwner[prop.adress] = null;
             });
 
+            // Création d'un dictionnaire avec toutes les propriétés en clé
+            // pour le stockage du nombre de maisons construites sur les props
             let buildings = {};
             properties.forEach(prop => {
                 buildings[prop.adress] = 0;
             });
 
 
+            // Incription des structures de données dans la BDD
             db_connect
                 .collection("game")
                 .updateOne(
@@ -38,16 +45,12 @@ exports.startGame = (req, res, next) => {
         })
         .catch((err) => res.status(400).json(err));
 
+    // Initialisation des caractéristiques des joueurs
     db_connect
         .collection("game")
         .findOne(gameQuery)
         .then((game) => {
-            let players = [
-                game.host,
-                game.p2,
-                game.p3,
-                game.p4
-            ];
+            let players = game.joueursCo[players];
 
             db_connect
                 .collection("users")
@@ -63,7 +66,7 @@ exports.startGame = (req, res, next) => {
         .catch((err) => res.status(400).json(err));
 }
 
-// renvoyer le proprio et l'argent
+// Fonction pour la gestion des cases sur lesquelles atterisse les pionts
 exports.playerAt = async function playerAt(req, res, next) {
     let db_connect = dbo.getDb();
 
@@ -85,8 +88,11 @@ exports.playerAt = async function playerAt(req, res, next) {
     let player = await db_connect.collection("users").findOne(playerQuery);
     let game = await db_connect.collection("game").findOne(gameQuery);
 
+    // Si la case est une propriété
     if (game.owners.hasOwnProperty(tileName)) {
         let property = await db_connect.collection("properties").findOne({ adress: tileName });
+
+        // Si la case est la propriété d'un autre joueur
         if (game.owners[property.adress] != null) {
             let landlord = await db_connect.collection("users").findOne({
                 pseudo: game.owners[property.adress]
@@ -107,9 +113,17 @@ exports.playerAt = async function playerAt(req, res, next) {
 
             res.status(200).json(player, landlord);
         }
+
+    // Si la case est une carte bourse ou une carte chance
+    } else if (tileName === "chance" || tileName === "bourse") {
+        res.status(418).json({
+            error: "Functionnality not yet implemented"
+        });
     }
 }
 
+
+// Fonction pour l'achat de propriétés
 exports.buyProperty = (req, res, next) => {
     let db_connect = dbo.getDb();
     let gameQuery = { code: req.body.gameCode };
@@ -151,12 +165,13 @@ exports.buyProperty = (req, res, next) => {
 
                 res.status(200).json(player);
             })
-            .catch((err) => res.status(400).json({ message: err }));
+            .catch((err) => res.status(400).json({ error: err }));
         });
     })
     .catch((err) => res.status(500).json(err));
 }
 
+// Fonction pour construire sur des propriétés
 exports.build = async function build(req, res, next) {
     let db_connect = dbo.getDb();
 
@@ -179,6 +194,7 @@ exports.build = async function build(req, res, next) {
     let property = await db_connect.collection("properties").findOne(propertyQuery);
     let game = await db_connect.collection("game").findOne(gameQuery);
 
+    // Récupération des propriétés du groupe
     let groupProperties = await db_connect
         .collection("properties")
         .find({ group: property.group })
@@ -198,6 +214,7 @@ exports.build = async function build(req, res, next) {
         return;
     }
 
+    // Verification de construction homogène
     try {
         groupProperties.forEach((prop) => {
             if (prop.adress !== property.adress
@@ -227,6 +244,8 @@ exports.build = async function build(req, res, next) {
     res.status(201).json({ message: "Succesfully built house"});
 }
 
+
+// Fonction pour hypothèquer une propriété
 exports.mortgage = async function mortgage(req, res, next) {
     let db_connect = dbo.getDb();
 
