@@ -10,6 +10,8 @@ Nous avons utilisé :
 - React
 - Socket.io
 - Local/Session Storage
+- Nodejs
+- Express.js
 - Bootstrap
 
 
@@ -20,15 +22,19 @@ Ce projet s'intitule **Douapolis**, c'est un jeu de société similaire au **Mon
 
 ## Préparation/Lancement de l'App
 
-1. Pour pouvoir lancer le client, il faut être dans le répertoire _./douapolis_, vous devez executer `npm install` afin de récuperer node_modules.
+/!\ Le projet ne peux pas se lancer sur les ordinateurs de l'université car ils n'ont pas node js d'installer.
 
-1. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
+1. Installer Nodejs sur l'ordinateur
+
+2. Pour pouvoir lancer le client, il faut être dans le répertoire _./douapolis_, vous devez executer `npm install` afin de récuperer node_modules.
+
+3. Pour pouvoir lancer le serveur, il faut se trouver dans _./douapolis/serveur_ et lancer également `npm install`
 
 > Une fois les _node_modules_ installés, toujours en se trouvant dans les bons dossiers pour le server et le client.
 
-1. Il faut ensuite lancer le serveur avec `nodemon server.js` ou avec `node server.js`
+4. Il faut ensuite lancer le serveur avec `nodemon server.js` ou avec `node server.js`
 
-4. Il faut ensuite lancer le serveur avec `npm start`
+5. Il faut ensuite lancer le serveur avec `npm start`
 
 ## Navigation dans l'App
 
