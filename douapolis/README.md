@@ -2,7 +2,7 @@
 
 Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) Par le groupe **CRIM**
 
-Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_
+Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_, encadré par **Rémy Cazabet**.
 
 Nous avons utilisé :
 
