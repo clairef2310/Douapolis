@@ -1,8 +1,6 @@
 # DOUAPOLI$
 
-Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) Par le groupe **CRIM**
-
-Nous avions choisi le sujet **RC6** : _Site WEB de jeu intéractif en ligne_, encadré par **Rémy Cazabet**.
+Projet réalisé dans le cadre de **LIFPROJET** (http://cazabetremy.fr/wiki/doku.php?id=projet:presentation) 
 
 Nous avons utilisé :
 
@@ -65,9 +63,4 @@ Ici, ils pourront **lancer les dés** et se **déplacer**.
 - Cloture de la salle d'attente si l'hôte quitte (ou changement d'hôte);
 - Cloture de la partie en cours si quelqu'un quitte.
 
-## Le groupe CRIM
-- Claire Fernandes @p2005541
-- Romain Dieu--Guillot @p2207518
-- Iona Sirach @p1810630
-- Mathys Sambet @p2207653
-
+## Ce projet a été fait à 4 personnes 
